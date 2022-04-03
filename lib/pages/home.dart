@@ -98,6 +98,25 @@ class _InsurancePlanListState extends State<InsurancePlanList> {
                         Style.searchStyle(hintText: 'Search insurance plan'),
                     controller: _searchController,
                     focusNode: _searchFocus,
+                    onChanged: (search) {
+                      if (search.isNotEmpty) {
+                        List<InsurancePlan> searchedInsurances = [];
+                        for (InsurancePlan insurance in insurances) {
+                          if (insurance.name!
+                              .toLowerCase()
+                              .contains(search.toLowerCase())) {
+                            searchedInsurances.add(insurance);
+                          }
+                        }
+                        setState(() {
+                          insurances = searchedInsurances;
+                        });
+                      } else {
+                        setState(() {
+                          insurances = Dummy.insurancePlans;
+                        });
+                      }
+                    },
                   ),
                 ),
               ),
