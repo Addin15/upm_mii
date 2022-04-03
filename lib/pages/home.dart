@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:upm_mii/constants/dummy.dart';
 import 'package:upm_mii/constants/style.dart';
+import 'package:upm_mii/models/insurance_plan.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -66,6 +68,13 @@ class InsurancePlanList extends StatefulWidget {
 
 class _InsurancePlanListState extends State<InsurancePlanList> {
   final TextEditingController _searchController = TextEditingController();
+  List<InsurancePlan> insurances = [];
+
+  @override
+  void initState() {
+    insurances = Dummy.insurancePlans;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +98,22 @@ class _InsurancePlanListState extends State<InsurancePlanList> {
               icon: const Icon(Ionicons.filter_outline),
             )
           ],
-        )
+        ),
+        Expanded(
+          child: ListView.separated(
+            itemCount: insurances.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            itemBuilder: (context, index) {
+              return Card(
+                child: Column(
+                  children: [
+                    Text(insurances[index].name!),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
       ],
     );
   }
