@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upm_mii/pages/constants/style.dart';
+import 'package:upm_mii/constants/style.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);

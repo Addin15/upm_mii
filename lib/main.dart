@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:upm_mii/pages/auth/sign_in.dart';
 import 'package:upm_mii/pages/auth/sign_up.dart';
 
-import 'pages/home.dart';
+import 'pages/nav.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +16,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'UPM MII',
+      debugShowCheckedModeBanner: false,
       routes: {
         'signin': (context) => const SignIn(),
         'signup': (context) => const SignUp(),
+        'home': (context) => const Nav(),
       },
-      initialRoute: 'signin',
+      initialRoute: 'home',
     );
   }
 }
