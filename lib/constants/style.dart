@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class Style {
   // Style for form
@@ -42,6 +43,28 @@ class Style {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
       backgroundColor: color,
+    );
+  }
+
+  // Style for search bar
+  static searchStyle({
+    String? hintText,
+  }) {
+    return InputDecoration(
+      prefixIcon: const Icon(
+        Ionicons.search_outline,
+        color: Colors.green,
+      ),
+      hintText: hintText,
+      border: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.green),
+      ),
+      focusedBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.green),
+      ),
+      enabledBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.green),
+      ),
     );
   }
 }
