@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upm_mii/pages/auth/sign_in.dart';
 
 import 'pages/home.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'UPM MII',
-      home: const Home(),
+      home: const SignIn(),
     );
   }
 }
