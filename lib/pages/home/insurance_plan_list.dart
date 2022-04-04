@@ -116,13 +116,15 @@ class _InsurancePlanListState extends State<InsurancePlanList>
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Ionicons.filter_outline),
+                      icon: const Icon(Ionicons.options_outline,
+                          color: Color(0xff243E82)),
                     )
                   ],
                 ),
-                const SizedBox(height: 10),
+                //const SizedBox(height: 10),
                 Expanded(
                   child: ListView.separated(
+                    padding: const EdgeInsets.only(top: 2, left: 5, right: 5),
                     itemCount: insurances.length,
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 10),
@@ -136,12 +138,22 @@ class _InsurancePlanListState extends State<InsurancePlanList>
                                       ViewInsurancePlan(insurances[index])));
                         },
                         child: Card(
-                          margin: const EdgeInsets.symmetric(horizontal: 20),
-                          color: Colors.amberAccent,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color(0xff243E82),
+                                  Color(0xff00AAE0),
+                                  // Color(0xff243E82),
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                            ),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 10),
                             child: Column(

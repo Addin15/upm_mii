@@ -51,19 +51,23 @@ class Style {
     String? hintText,
   }) {
     return InputDecoration(
+      contentPadding: const EdgeInsets.all(0),
       prefixIcon: const Icon(
         Ionicons.search_outline,
-        color: Colors.green,
+        color: Color(0xff243E82),
       ),
       hintText: hintText,
-      border: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Color(0xff243E82)),
       ),
-      focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Color(0xff243E82)),
       ),
-      enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.green),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Color(0xff243E82)),
       ),
     );
   }
