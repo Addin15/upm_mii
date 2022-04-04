@@ -9,52 +9,16 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
-  late TabController _tabController;
-  final PageStorageKey pageKey = const PageStorageKey('home');
-
+class _HomeState extends State<Home> {
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TabBar(
-          controller: _tabController,
-          indicatorColor: Colors.green,
-          indicatorPadding: const EdgeInsets.only(top: 5),
-          tabs: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: const Text(
-                'Insurance Plan',
-                style: TextStyle(color: Colors.green, fontSize: 20),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: const Text(
-                'Company',
-                style: TextStyle(color: Colors.green, fontSize: 20),
-              ),
-            ),
-          ],
-        ),
-        Expanded(
-          child: TabBarView(
-            key: pageKey,
-            controller: _tabController,
-            children: const [
-              LoadInsurancePlanList(),
-              LoadCompanyList(),
-            ],
-          ),
-        ),
-      ],
+    return Center(
+      child: Text('Home'),
     );
   }
 }

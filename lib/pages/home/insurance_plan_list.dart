@@ -26,7 +26,7 @@ class _LoadInsurancePlanListState extends State<LoadInsurancePlanList> {
             alignment: Alignment.center,
             color: Colors.white,
             child: const SpinKitDancingSquare(
-              color: Colors.green,
+              color: Colors.blue,
             ),
           );
         } else {
@@ -51,12 +51,17 @@ class InsurancePlanList extends StatefulWidget {
   State<InsurancePlanList> createState() => _InsurancePlanListState();
 }
 
-class _InsurancePlanListState extends State<InsurancePlanList> {
+class _InsurancePlanListState extends State<InsurancePlanList>
+    with AutomaticKeepAliveClientMixin<InsurancePlanList> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocus = FocusNode();
+  final PageStorageKey _pageStorageKey = const PageStorageKey('insurance');
 
   late List<InsurancePlan> insurances = [];
   late InsurancePlanController controller;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -68,6 +73,7 @@ class _InsurancePlanListState extends State<InsurancePlanList> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: _pageStorageKey,
       onTap: () {
         FocusScope.of(context).unfocus();
       },

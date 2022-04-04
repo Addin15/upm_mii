@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:upm_mii/pages/account.dart';
-import 'package:upm_mii/pages/discover.dart';
+import 'package:upm_mii/pages/profile.dart';
+import 'package:upm_mii/pages/plans.dart';
 import 'package:upm_mii/pages/home.dart';
-import 'package:upm_mii/pages/subscription.dart';
+import 'package:upm_mii/pages/faqs.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -14,9 +14,9 @@ class Nav extends StatefulWidget {
 
 const pages = [
   Home(),
-  Subscription(),
-  Discover(),
-  Account(),
+  FAQs(),
+  Plans(),
+  Profile(),
 ];
 
 class _NavState extends State<Nav> {
@@ -42,7 +42,7 @@ class _NavState extends State<Nav> {
         children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.green,
+        selectedItemColor: Colors.blueAccent,
         currentIndex: _selectedPage,
         onTap: (index) {
           setState(() {
@@ -53,19 +53,19 @@ class _NavState extends State<Nav> {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Ionicons.home_outline),
+            icon: Icon(Ionicons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Ionicons.heart_outline),
-            label: 'Subscription',
+            icon: Icon(Ionicons.school),
+            label: 'FAQs',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Ionicons.school_outline),
-            label: 'Discover',
+            icon: Icon(Ionicons.clipboard),
+            label: 'Plans',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Ionicons.person_outline),
+            icon: Icon(Ionicons.person),
             label: 'Account',
           )
         ],
