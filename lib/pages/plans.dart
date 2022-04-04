@@ -33,31 +33,100 @@ class _PlansState extends State<Plans> with TickerProviderStateMixin {
             children: [
               Container(
                 height: 2 / 10 * height,
-                color: Colors.blue,
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xff243E82),
+                    Color(0xff00AAE0),
+                  ],
+                )),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'InsureME',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
+                            ),
+                            Text(
+                              '"To save you in time of need"',
+                              style: TextStyle(
+                                color: Colors.white,
+                                //fontWeight: FontWeight.,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const CircleAvatar(
+                          radius: 40,
+                          backgroundImage: AssetImage('assets/logo.png'),
+                        ),
+                      ],
+                    ),
+                    const Text(
+                      'Insurance Plans',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Positioned(
                 bottom: 10,
                 child: Container(
                   width: 9 / 10 * width,
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: TabBar(
+                    unselectedLabelColor: const Color(0xff243E82),
+                    labelColor: Colors.white,
                     controller: _tabController,
                     indicatorColor: Colors.blue,
-                    indicatorPadding: const EdgeInsets.only(top: 5),
+                    indicator: ShapeDecoration(
+                      color: const Color(0xff243E82),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: const BorderSide(
+                          color: Color(0xff243E82),
+                        ),
+                      ),
+                    ),
+                    // indicatorPadding: const EdgeInsets.only(top: 5),
                     tabs: [
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: const Text(
                           'Insurance Plan',
-                          style: TextStyle(color: Colors.black, fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: const Text(
                           'Company',
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ],
