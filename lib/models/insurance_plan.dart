@@ -4,9 +4,15 @@ class InsurancePlan {
   final String? type;
   final String? company;
   final String? description;
+  final String? rate;
 
   InsurancePlan(
-      {this.id, this.name, this.type, this.company, this.description});
+      {this.id,
+      this.name,
+      this.type,
+      this.company,
+      this.description,
+      this.rate});
 
   factory InsurancePlan.fromJson(Map<String, dynamic> json) => InsurancePlan(
         id: json['id'],
@@ -14,5 +20,6 @@ class InsurancePlan {
         type: json['type'],
         company: json['company'],
         description: json['description'],
+        rate: json['rate'],
       );
 }

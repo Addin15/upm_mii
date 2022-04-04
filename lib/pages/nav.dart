@@ -27,7 +27,7 @@ class _NavState extends State<Nav> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 20),
-      color: Colors.blue,
+      color: const Color(0xff243E82),
       child: Scaffold(
         // appBar: AppBar(
         //   title: const Text('Insurely'),
@@ -45,7 +45,7 @@ class _NavState extends State<Nav> {
           children: pages,
         ),
         bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.blueAccent,
+          selectedItemColor: const Color(0xff243E82),
           currentIndex: _selectedPage,
           onTap: (index) {
             setState(() {

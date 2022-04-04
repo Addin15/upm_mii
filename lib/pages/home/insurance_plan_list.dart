@@ -26,7 +26,7 @@ class _LoadInsurancePlanListState extends State<LoadInsurancePlanList> {
             alignment: Alignment.center,
             color: Colors.white,
             child: const SpinKitDancingSquare(
-              color: Colors.blue,
+              color: Color(0xff243E82),
             ),
           );
         } else {
@@ -77,52 +77,52 @@ class _InsurancePlanListState extends State<InsurancePlanList>
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: insurances.isEmpty
-          ? const Center(child: Text('No available insurance plans'))
-          : Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            left: 20, top: 8, bottom: 5, right: 5),
-                        child: TextFormField(
-                          decoration: Style.searchStyle(
-                              hintText: 'Search insurance plan'),
-                          controller: _searchController,
-                          focusNode: _searchFocus,
-                          onChanged: (search) {
-                            if (search.isNotEmpty) {
-                              List<InsurancePlan> searchedInsurances = [];
-                              for (InsurancePlan insurance in insurances) {
-                                if (insurance.name!
-                                    .toLowerCase()
-                                    .contains(search.toLowerCase())) {
-                                  searchedInsurances.add(insurance);
-                                }
-                              }
-                              setState(() {
-                                insurances = searchedInsurances;
-                              });
-                            } else {
-                              setState(() {
-                                insurances = widget.insurances!;
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Ionicons.options_outline,
-                          color: Color(0xff243E82)),
-                    )
-                  ],
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(
+                      left: 20, top: 8, bottom: 5, right: 5),
+                  child: TextFormField(
+                    decoration:
+                        Style.searchStyle(hintText: 'Search insurance plan'),
+                    controller: _searchController,
+                    focusNode: _searchFocus,
+                    onChanged: (search) {
+                      if (search.isNotEmpty) {
+                        List<InsurancePlan> searchedInsurances = [];
+                        for (InsurancePlan insurance in widget.insurances!) {
+                          if (insurance.name!
+                              .toLowerCase()
+                              .contains(search.toLowerCase())) {
+                            searchedInsurances.add(insurance);
+                          }
+                        }
+                        setState(() {
+                          insurances = searchedInsurances;
+                        });
+                      } else {
+                        setState(() {
+                          insurances = widget.insurances!;
+                        });
+                      }
+                    },
+                  ),
                 ),
-                //const SizedBox(height: 10),
-                Expanded(
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Ionicons.options_outline,
+                    color: Color(0xff243E82)),
+              )
+            ],
+          ),
+          //const SizedBox(height: 10),
+          insurances.isEmpty
+              ? const Center(child: Text('No available insurance plans'))
+              : Expanded(
                   child: ListView.separated(
                     padding: const EdgeInsets.only(top: 2, left: 5, right: 5),
                     itemCount: insurances.length,
@@ -166,6 +166,7 @@ class _InsurancePlanListState extends State<InsurancePlanList>
                                         insurances[index].name!,
                                         style: const TextStyle(
                                           fontSize: 20,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
@@ -173,14 +174,21 @@ class _InsurancePlanListState extends State<InsurancePlanList>
                                     Text(
                                       insurances[index].type!,
                                       style: const TextStyle(
-                                          fontStyle: FontStyle.italic),
+                                          fontStyle: FontStyle.italic,
+                                          color: Colors.white),
                                     )
                                   ],
                                 ),
                                 const SizedBox(height: 5),
-                                Text('by ' + insurances[index].company!),
+                                Text(
+                                  'by ' + insurances[index].company!,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
                                 const SizedBox(height: 5),
-                                const Text('3% premium rate'),
+                                Text(
+                                  insurances[index].rate!,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
                               ],
                             ),
                           ),
@@ -189,8 +197,8 @@ class _InsurancePlanListState extends State<InsurancePlanList>
                     },
                   ),
                 ),
-              ],
-            ),
+        ],
+      ),
     );
   }
 }
