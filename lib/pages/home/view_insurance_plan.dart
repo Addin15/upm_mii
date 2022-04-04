@@ -67,14 +67,19 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
+                          borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: AppColor.primary),
                         ),
                         child: Column(
                           children: [
                             Container(
-                              color: AppColor.primary,
+                              decoration: BoxDecoration(
+                                  color: AppColor.primary,
+                                  borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10))),
                               width: double.infinity,
+                              padding: const EdgeInsets.symmetric(vertical: 20),
                               child: Column(
                                 children: [
                                   const CircleAvatar(
@@ -88,16 +93,79 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
                                     widget.insurancePlan.company!,
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 20),
-                                  )
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text(
+                                    'Phone: 03 7127234',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16),
+                                  ),
+                                  const Text(
+                                    'Email: company@company.com',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16),
+                                  ),
                                 ],
                               ),
                             ),
                             Container(
-                              color: Colors.white,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10))),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Name',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.name!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Type',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.type!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Rate',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.rate!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Description',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.description!),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
+                      const SizedBox(height: 10),
                       Container(
                         alignment: Alignment.centerRight,
                         child: TextButton(
