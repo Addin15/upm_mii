@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/controllers/company_controller.dart';
 import 'package:upm_mii/models/company.dart';
+import 'package:upm_mii/pages/home/view_company.dart';
 
 class LoadCompanyList extends StatefulWidget {
   const LoadCompanyList({Key? key}) : super(key: key);
@@ -28,7 +30,6 @@ class _LoadCompanyListState extends State<LoadCompanyList> {
             ),
           );
         } else {
-          print(snapshot.data);
           return CompanyList(
             companies: snapshot.data,
             controller: companyController,
@@ -110,19 +111,20 @@ class _CompanyListState extends State<CompanyList>
           companies.isEmpty
               ? const Center(child: Text('No available companies'))
               : Expanded(
-                  child: ListView.separated(
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
                     padding: const EdgeInsets.only(top: 2, left: 5, right: 5),
                     itemCount: companies.length,
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 10),
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     CupertinoPageRoute(
-                          //         builder: (context) =>
-                          //             ViewInsurancePlan(companies[index])));
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      ViewCompany(companies[index])));
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -141,24 +143,33 @@ class _CompanyListState extends State<CompanyList>
                                 end: Alignment.bottomRight,
                               ),
                             ),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            //padding: const EdgeInsets.only(
+                            //left: 15, right: 15, top: 10),
+                            child: Stack(
+                              alignment: Alignment.bottomCenter,
                               children: [
-                                Text(
-                                  companies[index].name!,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
+                                Image.asset('assets/company_default_logo.jpg'),
+                                Positioned(
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: AppColor.primary,
+                                        borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            bottomRight: Radius.circular(10))),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      companies[index].name!,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(height: 5),
-                                const SizedBox(height: 5),
-                                Text(
-                                  companies[index].phone!,
-                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
