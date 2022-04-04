@@ -42,6 +42,7 @@ class _NavState extends State<Nav> {
         children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.green,
         currentIndex: _selectedPage,
         onTap: (index) {
           setState(() {

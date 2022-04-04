@@ -7,4 +7,12 @@ class InsurancePlan {
 
   InsurancePlan(
       {this.id, this.name, this.type, this.company, this.description});
+
+  factory InsurancePlan.fromJson(Map<String, dynamic> json) => InsurancePlan(
+        id: json['id'],
+        name: json['name'],
+        type: json['type'],
+        company: json['company'],
+        description: json['description'],
+      );
 }
