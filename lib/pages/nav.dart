@@ -20,8 +20,8 @@ const pages = [
 ];
 
 class _NavState extends State<Nav> {
-  final PageController _pageController = PageController();
   int _selectedPage = 0;
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -30,29 +30,29 @@ class _NavState extends State<Nav> {
       color: const Color(0xff243E82),
       child: SafeArea(
         child: Scaffold(
+          key: _key,
           // appBar: AppBar(
           //   title: const Text('Insurely'),
           //   elevation: 0.5,
           //   backgroundColor: Colors.white,
           //   toolbarHeight: 80,
           // ),
-          body: PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                _selectedPage = index;
-              });
-            },
+          body: IndexedStack(
+            index: _selectedPage,
             children: pages,
           ),
+          endDrawer: const Profile(),
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: const Color(0xff243E82),
             currentIndex: _selectedPage,
             onTap: (index) {
-              setState(() {
-                _selectedPage = index;
-                _pageController.jumpToPage(index);
-              });
+              if (index == 3) {
+                _key.currentState!.openEndDrawer();
+              } else {
+                setState(() {
+                  _selectedPage = index;
+                });
+              }
             },
             type: BottomNavigationBarType.fixed,
             items: const [
