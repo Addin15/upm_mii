@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:upm_mii/constants/app_color.dart';
 
 class Style {
   // Style for form
@@ -37,7 +38,7 @@ class Style {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
         side: BorderSide(
-          color: Colors.green.shade200,
+          color: AppColor.primary,
           width: 2,
         ),
       ),
