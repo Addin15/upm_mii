@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/pages/home/company_list.dart';
@@ -19,6 +20,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
@@ -27,33 +29,40 @@ class _HomeState extends State<Home> {
           const SizedBox(
             height: 15,
           ),
-          const BillSubcription(),
+          GestureDetector(
+            onTap: () {},
+            child: BillSubcription(),
+          ),
           const SizedBox(
             height: 15,
           ),
           const TitleWithbutton(text: "News"),
-          Container(
-            height: 100,
-            child: Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              color: Colors.blue[100],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: const [
-                        Text("data"),
-                      ],
-                    ),
-                  ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                NewsCard(
+                  height: height,
+                  size: size,
+                  image: "assets/life_insurance.jpg",
+                  title: "Covid-19 coverage for takaful",
+                  date: "19 February 2019",
                 ),
-              ),
+                NewsCard(
+                  height: height,
+                  size: size,
+                  image: "assets/life_insurance.jpg",
+                  title: "Covid-19 coverage for takaful",
+                  date: "19 February 2019",
+                ),
+                NewsCard(
+                  height: height,
+                  size: size,
+                  image: "assets/life_insurance.jpg",
+                  title: "Covid-19 coverage for takaful",
+                  date: "19 February 2019",
+                ),
+              ],
             ),
           ),
           const SizedBox(
@@ -61,6 +70,81 @@ class _HomeState extends State<Home> {
           ),
           const TitleWithbutton(text: "Your Plans"),
         ],
+      ),
+    );
+  }
+}
+
+class NewsCard extends StatelessWidget {
+  const NewsCard(
+      {Key? key,
+      required this.height,
+      required this.size,
+      required this.image,
+      required this.title,
+      required this.date})
+      : super(key: key);
+
+  final double height;
+  final Size size;
+  final String image;
+  final String title;
+  final String date;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: (2 / 10 * height) + 40,
+      width: size.width * 1.0,
+      child: GestureDetector(
+        onTap: () {},
+        child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          color: Colors.blue[800],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Container(
+            height: 2 / 10 * height,
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Image.asset(
+                        image,
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        child: Text(
+                          "$title",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  "$date",
+                  style: TextStyle(
+                    color: Colors.yellow,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
