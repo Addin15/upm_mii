@@ -11,7 +11,7 @@ class Style {
     return InputDecoration(
       filled: true,
       isDense: true,
-      fillColor: const Color(0xff00AAE0),
+      fillColor: const Color(0xFFFFFFFF),
       hintText: hintText,
       contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       icon: Icon(
@@ -29,7 +29,7 @@ class Style {
       enabledBorder: OutlineInputBorder(
           gapPadding: 0,
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.solid)),
       disabledBorder: OutlineInputBorder(
           gapPadding: 0,
           borderRadius: BorderRadius.circular(10),

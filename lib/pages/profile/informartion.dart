@@ -15,10 +15,8 @@ class _InformationState extends State<Information> {
       child: ListView(children: [
         buildTextField("Full Name", "Siti Nur Amirah Binti Ahmad"),
         const SizedBox(height: 10),
-        buildTextField("MyKad Identity Number", "000902040116"),
         buildTextField("MyKad Number", "000902040116"),
         const SizedBox(height: 10),
-        buildTextField("State", "Melaka"),
         buildTextField("Gender", "Female"),
         const SizedBox(height: 10),
         buildTextField("Date of Birth", "09-02-2000"),
@@ -63,7 +61,10 @@ class _InformationState extends State<Information> {
         SizedBox(
           height: 10,
         ),
-        TextField(controller: text, decoration: Style.formStyle()),
+        TextField(
+          controller: text,
+          decoration: Style.formStyle(),
+        ),
       ],
     );
   }
