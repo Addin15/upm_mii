@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:upm_mii/pages/home/billing.dart';
 import 'package:upm_mii/pages/home/company_list.dart';
 import 'package:upm_mii/pages/home/insurance_plan_list.dart';
 import 'package:upm_mii/constants/style.dart';
@@ -30,7 +32,10 @@ class _HomeState extends State<Home> {
             height: 15,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Billing()));
+            },
             child: BillSubcription(),
           ),
           const SizedBox(
@@ -69,6 +74,45 @@ class _HomeState extends State<Home> {
             height: 15,
           ),
           const TitleWithbutton(text: "Your Plans"),
+          Container(
+            height: 75,
+            child: Card(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              color: Colors.blue[800],
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/pill.jpg',
+                          height: 50,
+                          width: 100,
+                        ),
+                        Image.asset(
+                          'assets/pill.jpg',
+                          height: 50,
+                          width: 100,
+                        ),
+                        Image.asset(
+                          'assets/pill.jpg',
+                          height: 50,
+                          width: 100,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -337,16 +381,17 @@ class HeaderWithSearchBox extends StatelessWidget {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                    hintText: "Search",
-                    hintStyle: TextStyle(
-                      color: Colors.grey.withOpacity(0.5),
-                    ),
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    prefixIcon: Icon(
-                      Ionicons.search_outline,
-                      color: Colors.blue,
-                    )),
+                  hintText: "Search",
+                  hintStyle: TextStyle(
+                    color: Colors.grey.withOpacity(0.5),
+                  ),
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  prefixIcon: Icon(
+                    Ionicons.search_outline,
+                    color: Colors.blue,
+                  ),
+                ),
               ),
             ),
           ),
