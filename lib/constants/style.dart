@@ -8,25 +8,27 @@ class Style {
     IconData? icon,
   }) {
     return InputDecoration(
-      icon: Icon(
-        icon,
-        color: Colors.greenAccent.shade200,
-      ),
+      icon: icon == null
+          ? const SizedBox.shrink()
+          : Icon(
+              icon,
+              color: AppColor.primary,
+            ),
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          borderSide: BorderSide(color: AppColor.primary, width: 2)),
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          borderSide: BorderSide(color: AppColor.primary, width: 2)),
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          borderSide: BorderSide(color: AppColor.primary, width: 2)),
       disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          borderSide: BorderSide(color: AppColor.primary, width: 2)),
       errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.redAccent.shade200, width: 2)),
+          borderSide: BorderSide(color: AppColor.primary, width: 2)),
     );
   }
 
