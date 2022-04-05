@@ -10,18 +10,27 @@ class Billing extends StatefulWidget {
   State<Billing> createState() => _BillingState();
 }
 
-class _BillingState extends State<Billing> {
+class _BillingState extends State<Billing> with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 5, vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: BuildAppbar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            BillAmount(height: height),
-            const SizedBox(height: 10),
-            Card(
+      appBar: buildAppbar(),
+      body: Column(
+        children: [
+          BillAmount(height: height),
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () {},
+            child: Card(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               color: Colors.blue[900],
               shape: RoundedRectangleBorder(
@@ -44,7 +53,7 @@ class _BillingState extends State<Billing> {
                               fontWeight: FontWeight.bold),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(
+                          padding: EdgeInsets.fromLTRB(
                             200,
                             0,
                             0,
@@ -63,23 +72,113 @@ class _BillingState extends State<Billing> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            Text(
-              "Recent Billings",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Recent Billings",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: TabBar(
+              isScrollable: true,
+              unselectedLabelColor: Colors.black38,
+              labelColor: Colors.black,
+              controller: _tabController,
+              indicatorColor: Colors.black,
+              tabs: [
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: const Text(
+                    'All',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: const Text(
+                    'Medical',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: const Text(
+                    'Property',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: const Text(
+                    'Education',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: const Text(
+                    'Motor',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                medical(),
+                Text("try"),
+                Text("try"),
+                Text("try"),
+                Text("try"),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  AppBar BuildAppbar() {
+  AppBar buildAppbar() {
     return AppBar(
       elevation: 0,
       backgroundColor: AppColor.primary,
     );
   }
+}
+
+Widget medical() {
+  return ListView.builder(
+      itemCount: 3,
+      itemBuilder: (BuildContext context, int index) {
+        return Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/zurich.png',
+                  height: 100,
+                  width: 100,
+                ),
+                Text(
+                  "Zurich Valuecare",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            const Divider(
+              color: Colors.black,
+            )
+          ],
+        );
+      });
 }
 
 class BillAmount extends StatelessWidget {

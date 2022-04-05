@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:upm_mii/models/news.dart';
 import 'package:upm_mii/pages/home/billing.dart';
 import 'package:upm_mii/pages/home/company_list.dart';
 import 'package:upm_mii/pages/home/insurance_plan_list.dart';
@@ -15,6 +17,27 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<News> news = [
+    News(
+      image: "assets/life_insurance.jpg",
+      title: "Covid-19 coverage for takaful",
+      date: DateTime.parse('2019-02-24'),
+      url: '',
+    ),
+    News(
+      image: "assets/life_insurance.jpg",
+      title: "Covid-19 coverage for takaful",
+      date: DateTime.parse('2019-02-24'),
+      url: '',
+    ),
+    News(
+      image: "assets/life_insurance.jpg",
+      title: "Covid-19 coverage for takaful",
+      date: DateTime.parse('2019-02-24'),
+      url: '',
+    ),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -46,27 +69,10 @@ class _HomeState extends State<Home> {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                NewsCard(
-                  height: height,
-                  size: size,
-                  image: "assets/life_insurance.jpg",
-                  title: "Covid-19 coverage for takaful",
-                  date: "19 February 2019",
-                ),
-                NewsCard(
-                  height: height,
-                  size: size,
-                  image: "assets/life_insurance.jpg",
-                  title: "Covid-19 coverage for takaful",
-                  date: "19 February 2019",
-                ),
-                NewsCard(
-                  height: height,
-                  size: size,
-                  image: "assets/life_insurance.jpg",
-                  title: "Covid-19 coverage for takaful",
-                  date: "19 February 2019",
-                ),
+                ...news.map((item) {
+                  return NewsCard(
+                      image: item.image!, title: item.title!, date: item.date!);
+                }),
               ],
             ),
           ),
@@ -121,27 +127,22 @@ class _HomeState extends State<Home> {
 
 class NewsCard extends StatelessWidget {
   const NewsCard(
-      {Key? key,
-      required this.height,
-      required this.size,
-      required this.image,
-      required this.title,
-      required this.date})
+      {Key? key, required this.image, required this.title, required this.date})
       : super(key: key);
 
-  final double height;
-  final Size size;
   final String image;
   final String title;
-  final String date;
+  final DateTime date;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: (2 / 10 * height) + 40,
-      width: size.width * 1.0,
+      height: 200,
+      width: 400,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          
+        },
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: Colors.blue[800],
@@ -149,7 +150,7 @@ class NewsCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Container(
-            height: 2 / 10 * height,
+            height: 300,
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -180,7 +181,7 @@ class NewsCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  "$date",
+                  DateFormat.yMMMd().format(date),
                   style: TextStyle(
                     color: Colors.yellow,
                   ),
