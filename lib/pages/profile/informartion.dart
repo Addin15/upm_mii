@@ -13,13 +13,21 @@ class _InformationState extends State<Information> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: ListView(children: [
-        buildTextField("Full Name", "Amirah"),
+        buildTextField("Full Name", "Siti Nur Amirah Binti Ahmad"),
         const SizedBox(height: 10),
         buildTextField("MyKad Identity Number", "000902040116"),
+        buildTextField("MyKad Number", "000902040116"),
         const SizedBox(height: 10),
         buildTextField("State", "Melaka"),
+        buildTextField("Gender", "Female"),
         const SizedBox(height: 10),
         buildTextField("Date of Birth", "09-02-2000"),
+        const SizedBox(height: 10),
+        buildTextField("Age", "22"),
+        const SizedBox(height: 10),
+        buildTextField("Phone", "017-6544375"),
+        const SizedBox(height: 10),
+        buildTextField("State", "Melaka"),
         const SizedBox(height: 10),
         buildTextField(
             "Address", "425-1 KM10, Jalan Melati, Umbai, 75460 Melaka"),
