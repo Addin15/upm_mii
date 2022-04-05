@@ -90,7 +90,7 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    widget.insurancePlan.company!,
+                                    widget.insurancePlan.company!.toString(),
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   ),

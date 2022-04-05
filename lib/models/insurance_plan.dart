@@ -2,7 +2,7 @@ class InsurancePlan {
   final int? id;
   final String? name;
   final String? type;
-  final String? company;
+  final int? company;
   final String? description;
   final String? rate;
 

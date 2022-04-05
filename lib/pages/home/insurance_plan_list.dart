@@ -181,7 +181,7 @@ class _InsurancePlanListState extends State<InsurancePlanList>
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
-                                  'by ' + insurances[index].company!,
+                                  'by ' + insurances[index].company!.toString(),
                                   style: const TextStyle(color: Colors.white),
                                 ),
                                 const SizedBox(height: 5),

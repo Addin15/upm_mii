@@ -37,7 +37,7 @@ class UserController {
   Future<dynamic> getUserInformation(int userId) async {
     try {
       //String token = await AuthenticateUser.getCachedToken();
-      String urlbase = '${Config.baseUrl}${Config.apiUrl}/$userId/profiles';
+      String urlbase = '${Config.baseUrl}${Config.apiUrl}/$userId';
       late UserInformation userInformation;
       var response = await get(
         Uri.parse(urlbase),

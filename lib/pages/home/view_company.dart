@@ -23,7 +23,7 @@ class _ViewCompanyState extends State<ViewCompany>
       id: 0,
       name: 'Best',
       type: 'Life',
-      company: 'AIA',
+      company: 23,
       description: 'desc',
       rate: '1%',
     ),
@@ -232,7 +232,7 @@ class _ViewCompanyState extends State<ViewCompany>
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            'by ' + insurances[index].company!,
+                            'by ' + insurances[index].company!.toString(),
                             style: const TextStyle(color: Colors.white),
                           ),
                           const SizedBox(height: 5),
