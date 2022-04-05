@@ -100,59 +100,112 @@ class _FAQsState extends State<FAQs> {
               animationDuration: const Duration(milliseconds: 500)),
           child: Column(
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 242, 242, 242),
-                    border:
-                        Border.all(color: Color.fromARGB(255, 242, 242, 242)),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: ExpandablePanel(
-                  header: Container(
-                      padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
-                      child: Text(
-                        'What is Life Insurance?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 102, 102, 102)),
-                      )),
-                  collapsed: Container(
-                      padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
-                      child: Text(
-                        'Life insurance is a contract between you and an insurance company. Essentially, in exchange for your premium payments, the insurance company will pay a lump sum known as a death benefit to your beneficiaries after your death. Your beneficiaries can use the money for whatever purpose they choose.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 0, 0, 0)),
-                      )),
-                  expanded: SizedBox.shrink(),
-                ),
-              ),
               SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 242, 242, 242),
-                    border:
-                        Border.all(color: Color.fromARGB(255, 242, 242, 242)),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: ExpandablePanel(
-                  header: Container(
-                      padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
-                      child: Text(
-                        'Why is life insurance useful?',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 102, 102, 102)),
-                      )),
-                  collapsed: Container(
-                      padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
-                      child: Text(
-                        'Life cover is useful to ensure the financial stability of your family in case you are unable to earn due to an accident or illness. The policy also pays the benefits to your beneficiaries in case of an untoward event. Procuring such coverage ensures that your family can to meet their expenses and sustain their lifestyles even in your absence.',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 0, 0, 0)),
-                      )),
-                  expanded: SizedBox.shrink(),
+                height: 395,
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 242, 242, 242),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 242, 242, 242)),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: ExpandableNotifier(
+                        child: ScrollOnExpand(
+                          child: ExpandablePanel(
+                            header: Container(
+                                padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
+                                child: Text(
+                                  'Glossary',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color:
+                                          Color.fromARGB(255, 102, 102, 102)),
+                                )),
+                            collapsed: SizedBox.shrink(),
+                            expanded: Container(
+                                padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
+                                child: Text(
+                                  'Life Insurance Policy : A guarantee the insurer pays a sum of money to named beneficiaries when the insured dies in exchange for the premiums paid by the policyholder during their lifetime.\n\nPremium : The payment made to the Life Insurance Company in exchange for your Life Insurance Policy. ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                )),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 242, 242, 242),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 242, 242, 242)),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: ExpandableNotifier(
+                        child: ScrollOnExpand(
+                          child: ExpandablePanel(
+                            header: Container(
+                                padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
+                                child: Text(
+                                  'What is Life Insurance?',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color:
+                                          Color.fromARGB(255, 102, 102, 102)),
+                                )),
+                            collapsed: SizedBox.shrink(),
+                            expanded: Container(
+                                padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
+                                child: Text(
+                                  'Life insurance is a contract between you and an insurance company. Essentially, in exchange for your premium payments, the insurance company will pay a lump sum known as a death benefit to your beneficiaries after your death. Your beneficiaries can use the money for whatever purpose they choose.',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                )),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 242, 242, 242),
+                          border: Border.all(
+                              color: Color.fromARGB(255, 242, 242, 242)),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: ExpandableNotifier(
+                        child: ScrollOnExpand(
+                          scrollOnExpand: true,
+                          scrollOnCollapse: false,
+                          child: ExpandablePanel(
+                            header: Container(
+                                padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
+                                child: Text(
+                                  'Why is Life Insurance useful?',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color:
+                                          Color.fromARGB(255, 102, 102, 102)),
+                                )),
+                            collapsed: SizedBox.shrink(),
+                            expanded: Container(
+                                padding: EdgeInsets.fromLTRB(10, 10, 5, 5),
+                                child: Text(
+                                  'Life cover is useful to ensure the financial stability of your family in case you are unable to earn due to an accident or illness. The policy also pays the benefits to your beneficiaries in case of an untoward event. Procuring such coverage ensures that your family can to meet their expenses and sustain their lifestyles even in your absence.',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 0, 0, 0)),
+                                )),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               )
             ],
