@@ -6,27 +6,38 @@ class Style {
   // Style for form
   static formStyle({
     IconData? icon,
+    String? hintText,
   }) {
     return InputDecoration(
+      filled: true,
+      isDense: true,
+      fillColor: const Color(0xff00AAE0),
+      hintText: hintText,
+      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       icon: Icon(
         icon,
-        color: Colors.greenAccent.shade200,
+        color: const Color(0xff00AAE0),
       ),
       border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          gapPadding: 0,
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
       focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          gapPadding: 0,
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
       enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          gapPadding: 0,
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
       disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.greenAccent.shade200, width: 2)),
+          gapPadding: 0,
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
       errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.redAccent.shade200, width: 2)),
+          gapPadding: 0,
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
     );
   }
 
@@ -36,13 +47,10 @@ class Style {
   }) {
     return TextButton.styleFrom(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-        side: BorderSide(
-          color: AppColor.primary,
-          width: 2,
-        ),
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide.none,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
       backgroundColor: color,
     );
   }
