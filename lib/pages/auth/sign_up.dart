@@ -143,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                                 _passwordController.text);
 
                             if (res) {
-                              Navigator.pushReplacementNamed(context, 'login');
+                              Navigator.pushReplacementNamed(context, 'signin');
                             } else {
                               print('error register');
                             }
