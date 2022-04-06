@@ -81,7 +81,11 @@ class _ProfileState extends State<Profile> {
               color: Colors.black,
             ),
             buildMenuItem(
-                text: 'Logout', icon: Icons.logout_outlined, onClicked: () {}),
+                text: 'Logout',
+                icon: Icons.logout_outlined,
+                onClicked: () {
+                  Navigator.pushReplacementNamed(context, 'signin');
+                }),
           ],
         ),
       ),

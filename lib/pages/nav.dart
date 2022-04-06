@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:upm_mii/models/user.dart';
 import 'package:upm_mii/pages/profile.dart';
 import 'package:upm_mii/pages/plans.dart';
 import 'package:upm_mii/pages/home.dart';
@@ -25,6 +26,10 @@ class _NavState extends State<Nav> {
 
   @override
   Widget build(BuildContext context) {
+    User user = ModalRoute.of(context)!.settings.arguments as User;
+
+    print(user.username);
+
     return Container(
       padding: const EdgeInsets.only(top: 20),
       color: const Color(0xff243E82),
