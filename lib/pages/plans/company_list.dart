@@ -123,8 +123,8 @@ class _CompanyListState extends State<CompanyList>
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) =>
-                                      ViewCompany(companies[index])));
+                                  builder: (context) => LoadViewCompany(
+                                      company: companies[index])));
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(
@@ -148,7 +148,7 @@ class _CompanyListState extends State<CompanyList>
                             child: Stack(
                               alignment: Alignment.bottomCenter,
                               children: [
-                                Image.asset('assets/company_default_logo.jpg'),
+                                getImg(companies[index].imgUrl),
                                 Positioned(
                                   bottom: 0,
                                   left: 0,
@@ -182,5 +182,13 @@ class _CompanyListState extends State<CompanyList>
         ],
       ),
     );
+  }
+
+  getImg(String? imgUrl) {
+    if (imgUrl!.isEmpty) {
+      return Image.asset('assets/company_default_logo.jpg');
+    } else {
+      return Image.network(imgUrl);
+    }
   }
 }

@@ -1,15 +1,63 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/constants/app_color.dart';
+import 'package:upm_mii/controllers/company_controller.dart';
 import 'package:upm_mii/models/company.dart';
 import 'package:upm_mii/models/insurance_plan.dart';
 import 'package:upm_mii/pages/plans/view_insurance_plan.dart';
 
-class ViewCompany extends StatefulWidget {
-  const ViewCompany(this.company, {Key? key}) : super(key: key);
+class LoadViewCompany extends StatefulWidget {
+  const LoadViewCompany({this.company, Key? key}) : super(key: key);
 
   final Company? company;
+
+  @override
+  State<LoadViewCompany> createState() => _LoadViewCompanyState();
+}
+
+class _LoadViewCompanyState extends State<LoadViewCompany> {
+  Future<Map<String, List<dynamic>>> getInsurancesandFaqs() async {
+    CompanyController controller = CompanyController();
+    List<InsurancePlan> insurances =
+        await controller.getCompanyInsurances(widget.company!.id.toString());
+
+    return {
+      'insurances': insurances,
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: getInsurancesandFaqs(),
+      builder: (context, AsyncSnapshot<Map<String, List<dynamic>>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.white,
+            child: const SpinKitDancingSquare(
+              color: Color(0xff243E82),
+            ),
+          );
+        } else {
+          return ViewCompany(
+            company: widget.company,
+            insurances: snapshot.data!['insurances'] as List<InsurancePlan>,
+          );
+        }
+      },
+    );
+  }
+}
+
+class ViewCompany extends StatefulWidget {
+  const ViewCompany({this.company, this.insurances, Key? key})
+      : super(key: key);
+
+  final Company? company;
+  final List<InsurancePlan>? insurances;
 
   @override
   State<ViewCompany> createState() => _ViewCompanyState();
@@ -23,6 +71,7 @@ class _ViewCompanyState extends State<ViewCompany>
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
+    insurances = widget.insurances!;
     super.initState();
   }
 
@@ -81,10 +130,9 @@ class _ViewCompanyState extends State<ViewCompany>
                           Container(
                             height: 100,
                             width: double.infinity,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               image: DecorationImage(
-                                image:
-                                    AssetImage('assets/background_dummy.jpg'),
+                                image: getBgImg(widget.company!.bgImgUrl),
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -140,14 +188,13 @@ class _ViewCompanyState extends State<ViewCompany>
                           )
                         ],
                       ),
-                      const Positioned(
+                      Positioned(
                         top: 50,
                         left: 10,
                         child: CircleAvatar(
                           radius: 50,
                           backgroundColor: Colors.white,
-                          backgroundImage:
-                              AssetImage('assets/company_default_logo.jpg'),
+                          backgroundImage: getImg(widget.company!.imgUrl),
                         ),
                       ),
                     ],
@@ -165,79 +212,77 @@ class _ViewCompanyState extends State<ViewCompany>
   Widget insurancePlansTab() {
     return insurances.isEmpty
         ? const Center(child: Text('No available insurance plans'))
-        : Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.only(top: 2, left: 5, right: 5),
-              itemCount: insurances.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 10),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) =>
-                                ViewInsurancePlan(insurances[index])));
-                  },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
+        : ListView.separated(
+            padding: const EdgeInsets.only(top: 2, left: 5, right: 5),
+            itemCount: insurances.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) =>
+                              ViewInsurancePlan(insurances[index])));
+                },
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Color(0xff243E82),
-                            Color(0xff00AAE0),
-                            // Color(0xff243E82),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color(0xff243E82),
+                          Color(0xff00AAE0),
+                          // Color(0xff243E82),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  insurances[index].name!,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                insurances[index].name!,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              Text(
-                                insurances[index].type!,
-                                style: const TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    color: Colors.white),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            'by ' + insurances[index].company!.toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            insurances[index].rate!.toString(),
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
+                            ),
+                            Text(
+                              insurances[index].type!,
+                              style: const TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.white),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'by ' + insurances[index].company!.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          insurances[index].rate!.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
           );
   }
 
@@ -247,50 +292,50 @@ class _ViewCompanyState extends State<ViewCompany>
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: ListView(
         children: [
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           IntrinsicHeight(
             child: Row(
               children: [
-                Icon(Ionicons.call_outline),
-                SizedBox(width: 5),
+                const Icon(Ionicons.call_outline),
+                const SizedBox(width: 5),
                 VerticalDivider(
                   width: 1,
                   thickness: 1,
                   color: AppColor.primary,
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Text(widget.company!.phone!),
               ],
             ),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           IntrinsicHeight(
             child: Row(
               children: [
-                Icon(Ionicons.locate_outline),
-                SizedBox(width: 5),
+                const Icon(Ionicons.locate_outline),
+                const SizedBox(width: 5),
                 VerticalDivider(
                   width: 1,
                   thickness: 1,
                   color: AppColor.primary,
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Text(widget.company!.address!),
               ],
             ),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           IntrinsicHeight(
             child: Row(
               children: [
-                Icon(Ionicons.information_outline),
-                SizedBox(width: 5),
+                const Icon(Ionicons.information_outline),
+                const SizedBox(width: 5),
                 VerticalDivider(
                   width: 1,
                   thickness: 1,
                   color: AppColor.primary,
                 ),
-                SizedBox(width: 15),
+                const SizedBox(width: 15),
                 Text(widget.company!.about!),
               ],
             ),
@@ -302,6 +347,22 @@ class _ViewCompanyState extends State<ViewCompany>
 
   // Insurance plans tab
   Widget faqsTab() {
-    return Expanded(child: Text('c'));
+    return Text('c');
+  }
+
+  getBgImg(String? bgImgUrl) {
+    if (bgImgUrl!.isEmpty) {
+      return const AssetImage('assets/background_dummy.jpg');
+    } else {
+      return NetworkImage(bgImgUrl);
+    }
+  }
+
+  getImg(String? imgUrl) {
+    if (imgUrl!.isEmpty) {
+      return const AssetImage('assets/company_default_logo.jpg');
+    } else {
+      return NetworkImage(imgUrl);
+    }
   }
 }
