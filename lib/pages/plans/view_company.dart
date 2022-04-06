@@ -1,3 +1,4 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -5,6 +6,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/controllers/company_controller.dart';
 import 'package:upm_mii/models/company.dart';
+import 'package:upm_mii/models/company_faq.dart';
 import 'package:upm_mii/models/insurance_plan.dart';
 import 'package:upm_mii/pages/plans/view_insurance_plan.dart';
 
@@ -23,8 +25,12 @@ class _LoadViewCompanyState extends State<LoadViewCompany> {
     List<InsurancePlan> insurances =
         await controller.getCompanyInsurances(widget.company!.id.toString());
 
+    List<CompanyFAQ> faqs =
+        await controller.getCompanyFaqs(widget.company!.id.toString());
+
     return {
       'insurances': insurances,
+      'faqs': faqs,
     };
   }
 
@@ -45,6 +51,7 @@ class _LoadViewCompanyState extends State<LoadViewCompany> {
           return ViewCompany(
             company: widget.company,
             insurances: snapshot.data!['insurances'] as List<InsurancePlan>,
+            faqs: snapshot.data!['faqs'] as List<CompanyFAQ>,
           );
         }
       },
@@ -53,11 +60,12 @@ class _LoadViewCompanyState extends State<LoadViewCompany> {
 }
 
 class ViewCompany extends StatefulWidget {
-  const ViewCompany({this.company, this.insurances, Key? key})
+  const ViewCompany({this.company, this.insurances, this.faqs, Key? key})
       : super(key: key);
 
   final Company? company;
   final List<InsurancePlan>? insurances;
+  final List<CompanyFAQ>? faqs;
 
   @override
   State<ViewCompany> createState() => _ViewCompanyState();
@@ -67,11 +75,13 @@ class _ViewCompanyState extends State<ViewCompany>
     with TickerProviderStateMixin {
   late TabController tabController;
   List<InsurancePlan> insurances = [];
+  List<CompanyFAQ> faqs = [];
 
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
     insurances = widget.insurances!;
+    faqs = widget.faqs!;
     super.initState();
   }
 
@@ -213,7 +223,7 @@ class _ViewCompanyState extends State<ViewCompany>
     return insurances.isEmpty
         ? const Center(child: Text('No available insurance plans'))
         : ListView.separated(
-            padding: const EdgeInsets.only(top: 2, left: 5, right: 5),
+            padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
             itemCount: insurances.length,
             separatorBuilder: (context, index) => const SizedBox(height: 10),
             itemBuilder: (context, index) {
@@ -269,7 +279,7 @@ class _ViewCompanyState extends State<ViewCompany>
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          'by ' + insurances[index].company!.toString(),
+                          'by ' + insurances[index].company!.name.toString(),
                           style: const TextStyle(color: Colors.white),
                         ),
                         const SizedBox(height: 5),
@@ -394,7 +404,38 @@ class _ViewCompanyState extends State<ViewCompany>
 
   // Insurance plans tab
   Widget faqsTab() {
-    return Text('c');
+    return faqs.isEmpty
+        ? const Center(child: Text('No available FAQs'))
+        : ListView.separated(
+            padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+            itemCount: faqs.length,
+            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            itemBuilder: (context, index) {
+              return ExpandableNotifier(
+                child: ScrollOnExpand(
+                  child: ExpandablePanel(
+                    header: Container(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 5, 5),
+                        child: Text(
+                          faqs[index].topic!,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 102, 102, 102)),
+                        )),
+                    collapsed: const SizedBox.shrink(),
+                    expanded: Container(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 5, 5),
+                        child: Text(
+                          faqs[index].content!,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 0, 0, 0)),
+                        )),
+                  ),
+                ),
+              );
+            },
+          );
   }
 
   getBgImg(String? bgImgUrl) {

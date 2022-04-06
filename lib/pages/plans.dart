@@ -11,7 +11,6 @@ class Plans extends StatefulWidget {
 
 class _PlansState extends State<Plans> with TickerProviderStateMixin {
   late TabController _tabController;
-  final PageStorageKey pageKey = const PageStorageKey('home');
 
   @override
   void initState() {
@@ -138,7 +137,6 @@ class _PlansState extends State<Plans> with TickerProviderStateMixin {
         ),
         Expanded(
           child: TabBarView(
-            key: pageKey,
             controller: _tabController,
             children: const [
               LoadInsurancePlanList(),

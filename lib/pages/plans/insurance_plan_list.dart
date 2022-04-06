@@ -51,17 +51,13 @@ class InsurancePlanList extends StatefulWidget {
   State<InsurancePlanList> createState() => _InsurancePlanListState();
 }
 
-class _InsurancePlanListState extends State<InsurancePlanList>
-    with AutomaticKeepAliveClientMixin<InsurancePlanList> {
+class _InsurancePlanListState extends State<InsurancePlanList> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocus = FocusNode();
   final PageStorageKey _pageStorageKey = const PageStorageKey('insurance');
 
   late List<InsurancePlan> insurances = [];
   late InsurancePlanController controller;
-
-  @override
-  bool get wantKeepAlive => true;
 
   @override
   void initState() {

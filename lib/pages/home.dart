@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:upm_mii/models/news.dart';
-import 'package:upm_mii/pages/plans/billing.dart';
+import 'package:upm_mii/pages/home/billing.dart';
 import 'package:upm_mii/pages/plans/company_list.dart';
 import 'package:upm_mii/pages/plans/insurance_plan_list.dart';
 import 'package:upm_mii/constants/style.dart';

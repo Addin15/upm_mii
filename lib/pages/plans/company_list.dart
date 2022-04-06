@@ -51,17 +51,13 @@ class CompanyList extends StatefulWidget {
   State<CompanyList> createState() => _CompanyListState();
 }
 
-class _CompanyListState extends State<CompanyList>
-    with AutomaticKeepAliveClientMixin<CompanyList> {
+class _CompanyListState extends State<CompanyList> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _searchFocus = FocusNode();
   final PageStorageKey _pageStorageKey = const PageStorageKey('company');
 
   late List<Company> companies = [];
   late CompanyController controller;
-
-  @override
-  bool get wantKeepAlive => true;
 
   @override
   void initState() {
