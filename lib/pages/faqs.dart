@@ -217,7 +217,7 @@ class DataSearch extends SearchDelegate<String> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              query,
+              'Press Back To Return',
             )
           ],
         ),
