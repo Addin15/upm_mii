@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:upm_mii/models/news.dart';
-import 'package:upm_mii/pages/home/billing.dart';
-import 'package:upm_mii/pages/home/company_list.dart';
-import 'package:upm_mii/pages/home/insurance_plan_list.dart';
+import 'package:upm_mii/pages/plans/billing.dart';
+import 'package:upm_mii/pages/plans/company_list.dart';
+import 'package:upm_mii/pages/plans/insurance_plan_list.dart';
 import 'package:upm_mii/constants/style.dart';
 
 class Home extends StatefulWidget {
@@ -140,9 +140,7 @@ class NewsCard extends StatelessWidget {
       height: 200,
       width: 400,
       child: GestureDetector(
-        onTap: () {
-          
-        },
+        onTap: () {},
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: Colors.blue[800],

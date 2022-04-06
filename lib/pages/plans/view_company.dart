@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/models/company.dart';
 import 'package:upm_mii/models/insurance_plan.dart';
-import 'package:upm_mii/pages/home/view_insurance_plan.dart';
+import 'package:upm_mii/pages/plans/view_insurance_plan.dart';
 
 class ViewCompany extends StatefulWidget {
   const ViewCompany(this.company, {Key? key}) : super(key: key);
@@ -18,16 +18,7 @@ class ViewCompany extends StatefulWidget {
 class _ViewCompanyState extends State<ViewCompany>
     with TickerProviderStateMixin {
   late TabController tabController;
-  List<InsurancePlan> insurances = [
-    InsurancePlan(
-      id: 0,
-      name: 'Best',
-      type: 'Life',
-      company: 23,
-      description: 'desc',
-      rate: '1%',
-    ),
-  ];
+  List<InsurancePlan> insurances = [];
 
   @override
   void initState() {
@@ -68,9 +59,9 @@ class _ViewCompanyState extends State<ViewCompany>
                         Navigator.pop(context);
                       },
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Company Details',
+                        widget.company!.name!,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
@@ -99,10 +90,10 @@ class _ViewCompanyState extends State<ViewCompany>
                             ),
                           ),
                           const SizedBox(height: 60),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.only(left: 8.0),
                             child: Text(
-                              'Company Names',
+                              widget.company!.name!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -237,7 +228,7 @@ class _ViewCompanyState extends State<ViewCompany>
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            insurances[index].rate!,
+                            insurances[index].rate!.toString(),
                             style: const TextStyle(color: Colors.white),
                           ),
                         ],
@@ -252,61 +243,59 @@ class _ViewCompanyState extends State<ViewCompany>
 
   // Insurance plans tab
   Widget aboutTab() {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Column(
-          children: [
-            SizedBox(height: 15),
-            IntrinsicHeight(
-              child: Row(
-                children: [
-                  Icon(Ionicons.call_outline),
-                  SizedBox(width: 5),
-                  VerticalDivider(
-                    width: 1,
-                    thickness: 1,
-                    color: AppColor.primary,
-                  ),
-                  SizedBox(width: 15),
-                  Text('03 17238832'),
-                ],
-              ),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: ListView(
+        children: [
+          SizedBox(height: 15),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Icon(Ionicons.call_outline),
+                SizedBox(width: 5),
+                VerticalDivider(
+                  width: 1,
+                  thickness: 1,
+                  color: AppColor.primary,
+                ),
+                SizedBox(width: 15),
+                Text(widget.company!.phone!),
+              ],
             ),
-            SizedBox(height: 15),
-            IntrinsicHeight(
-              child: Row(
-                children: [
-                  Icon(Ionicons.locate_outline),
-                  SizedBox(width: 5),
-                  VerticalDivider(
-                    width: 1,
-                    thickness: 1,
-                    color: AppColor.primary,
-                  ),
-                  SizedBox(width: 15),
-                  Text('Seri Kembangan, Selangor'),
-                ],
-              ),
+          ),
+          SizedBox(height: 15),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Icon(Ionicons.locate_outline),
+                SizedBox(width: 5),
+                VerticalDivider(
+                  width: 1,
+                  thickness: 1,
+                  color: AppColor.primary,
+                ),
+                SizedBox(width: 15),
+                Text(widget.company!.address!),
+              ],
             ),
-            SizedBox(height: 15),
-            IntrinsicHeight(
-              child: Row(
-                children: [
-                  Icon(Ionicons.information_outline),
-                  SizedBox(width: 5),
-                  VerticalDivider(
-                    width: 1,
-                    thickness: 1,
-                    color: AppColor.primary,
-                  ),
-                  SizedBox(width: 15),
-                  Text('Best company'),
-                ],
-              ),
+          ),
+          SizedBox(height: 15),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Icon(Ionicons.information_outline),
+                SizedBox(width: 5),
+                VerticalDivider(
+                  width: 1,
+                  thickness: 1,
+                  color: AppColor.primary,
+                ),
+                SizedBox(width: 15),
+                Text(widget.company!.about!),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

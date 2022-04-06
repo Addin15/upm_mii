@@ -5,7 +5,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/controllers/insurance_plan_controller.dart';
 import 'package:upm_mii/models/insurance_plan.dart';
-import 'package:upm_mii/pages/home/view_insurance_plan.dart';
+import 'package:upm_mii/pages/plans/view_insurance_plan.dart';
 
 class LoadInsurancePlanList extends StatefulWidget {
   const LoadInsurancePlanList({Key? key}) : super(key: key);
@@ -181,12 +181,17 @@ class _InsurancePlanListState extends State<InsurancePlanList>
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
-                                  'by ' + insurances[index].company!.toString(),
+                                  'by ' +
+                                      insurances[index]
+                                          .company!
+                                          .name
+                                          .toString(),
                                   style: const TextStyle(color: Colors.white),
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
-                                  insurances[index].rate!,
+                                  insurances[index].rate!.toString() +
+                                      '% premium rate',
                                   style: const TextStyle(color: Colors.white),
                                 ),
                               ],

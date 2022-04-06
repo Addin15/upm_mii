@@ -82,27 +82,28 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
                               padding: const EdgeInsets.symmetric(vertical: 20),
                               child: Column(
                                 children: [
-                                  const CircleAvatar(
+                                  CircleAvatar(
                                     radius: 50,
                                     backgroundColor: Colors.white,
-                                    backgroundImage: AssetImage(
-                                        'assets/company_default_logo.jpg'),
+                                    backgroundImage: getImg(
+                                        widget.insurancePlan.company!.imgUrl!),
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
-                                    widget.insurancePlan.company!.toString(),
+                                    widget.insurancePlan.company!.name
+                                        .toString(),
                                     style: const TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   ),
                                   const SizedBox(height: 5),
-                                  const Text(
-                                    'Phone: 03 7127234',
-                                    style: TextStyle(
+                                  Text(
+                                    'Phone: ${widget.insurancePlan.company!.phone}',
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 16),
                                   ),
-                                  const Text(
-                                    'Email: company@company.com',
-                                    style: TextStyle(
+                                  Text(
+                                    'Email: ${widget.insurancePlan.company!.email}',
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 16),
                                   ),
                                 ],
@@ -148,7 +149,8 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
                                         fontSize: 16),
                                   ),
                                   const SizedBox(height: 5),
-                                  Text(widget.insurancePlan.rate!),
+                                  Text(widget.insurancePlan.rate!.toString() +
+                                      '%'),
                                   const SizedBox(height: 10),
                                   Text(
                                     'Description',
@@ -190,5 +192,13 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
         ),
       ),
     );
+  }
+
+  getImg(String url) {
+    if (url.isEmpty) {
+      return const AssetImage('assets/company_default_logo.jpg');
+    } else {
+      return NetworkImage(url);
+    }
   }
 }

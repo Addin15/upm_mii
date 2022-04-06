@@ -5,7 +5,7 @@ import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/controllers/company_controller.dart';
 import 'package:upm_mii/models/company.dart';
-import 'package:upm_mii/pages/home/view_company.dart';
+import 'package:upm_mii/pages/plans/view_company.dart';
 
 class LoadCompanyList extends StatefulWidget {
   const LoadCompanyList({Key? key}) : super(key: key);

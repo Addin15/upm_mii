@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:upm_mii/pages/home/company_list.dart';
-import 'package:upm_mii/pages/home/insurance_plan_list.dart';
+import 'package:upm_mii/pages/plans/company_list.dart';
+import 'package:upm_mii/pages/plans/insurance_plan_list.dart';
 
 class Plans extends StatefulWidget {
   const Plans({Key? key}) : super(key: key);

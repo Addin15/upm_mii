@@ -22,14 +22,14 @@ class Company {
   });
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
-        id: json['id'],
-        name: json['name'],
-        phone: json['phone'],
-        email: json['email'],
-        address: json['address'],
-        website: json['website'],
-        imgUrl: json['img_url'],
-        bgImgUrl: json['bg_img_url'],
-        about: json['about'],
+        id: json['c_id'],
+        name: json['c_name'],
+        phone: json['c_phone'],
+        email: json['c_email'],
+        address: json['c_address'],
+        website: json['c_website'],
+        imgUrl: json['c_img_url'],
+        bgImgUrl: json['c_bg_img_url'],
+        about: json['c_about'],
       );
 }
