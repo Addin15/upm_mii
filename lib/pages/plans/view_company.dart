@@ -296,7 +296,10 @@ class _ViewCompanyState extends State<ViewCompany>
           IntrinsicHeight(
             child: Row(
               children: [
-                const Icon(Ionicons.call_outline),
+                Icon(
+                  Ionicons.call_outline,
+                  color: AppColor.primary,
+                ),
                 const SizedBox(width: 5),
                 VerticalDivider(
                   width: 1,
@@ -312,7 +315,48 @@ class _ViewCompanyState extends State<ViewCompany>
           IntrinsicHeight(
             child: Row(
               children: [
-                const Icon(Ionicons.locate_outline),
+                Icon(
+                  Ionicons.mail_outline,
+                  color: AppColor.primary,
+                ),
+                const SizedBox(width: 5),
+                VerticalDivider(
+                  width: 1,
+                  thickness: 1,
+                  color: AppColor.primary,
+                ),
+                const SizedBox(width: 15),
+                Text(widget.company!.email!),
+              ],
+            ),
+          ),
+          const SizedBox(height: 15),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Icon(
+                  Ionicons.globe_outline,
+                  color: AppColor.primary,
+                ),
+                const SizedBox(width: 5),
+                VerticalDivider(
+                  width: 1,
+                  thickness: 1,
+                  color: AppColor.primary,
+                ),
+                const SizedBox(width: 15),
+                Text(widget.company!.website!),
+              ],
+            ),
+          ),
+          const SizedBox(height: 15),
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Icon(
+                  Ionicons.locate_outline,
+                  color: AppColor.primary,
+                ),
                 const SizedBox(width: 5),
                 VerticalDivider(
                   width: 1,
@@ -328,7 +372,10 @@ class _ViewCompanyState extends State<ViewCompany>
           IntrinsicHeight(
             child: Row(
               children: [
-                const Icon(Ionicons.information_outline),
+                Icon(
+                  Ionicons.information_outline,
+                  color: AppColor.primary,
+                ),
                 const SizedBox(width: 5),
                 VerticalDivider(
                   width: 1,

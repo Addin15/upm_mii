@@ -41,7 +41,7 @@ class CompanyController {
     try {
       //String token = await AuthenticateUser.getCachedToken();
       String urlbase =
-          '${Config.baseUrl}${Config.apiUrl}/companies/$companyId/insurances';
+          '${Config.baseUrl}${Config.apiUrl}/company/$companyId/insurances';
       List<InsurancePlan> insurancePlanList = [];
       var response = await get(
         Uri.parse(urlbase),
