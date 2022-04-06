@@ -51,7 +51,7 @@ class UserController {
       if (response.statusCode == 200) {
         List body = jsonDecode(response.body);
         UserInformation userInfo =
-            body[0].map((item) => SubscribedPlan.fromJson(item)).toList();
+            body[0].map((item) => UserInformation.fromJson(item)).toList();
         userInformation = userInfo;
       }
 
