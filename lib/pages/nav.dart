@@ -14,7 +14,7 @@ class Nav extends StatefulWidget {
 }
 
 const pages = [
-  Home(),
+  LoadHome(),
   FAQs(),
   Plans(),
   Profile(),

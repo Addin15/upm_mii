@@ -35,6 +35,8 @@ class AuthController {
           email: u['email'],
           token: body['token'],
         );
+        print('success');
+        print(user);
         return user;
       }
       return null;

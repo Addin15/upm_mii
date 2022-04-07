@@ -1,51 +1,65 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:upm_mii/controllers/home_controller.dart';
 import 'package:upm_mii/models/news.dart';
 import 'package:upm_mii/pages/home/billing.dart';
+import 'package:upm_mii/pages/home/news.dart';
 import 'package:upm_mii/pages/plans/company_list.dart';
 import 'package:upm_mii/pages/plans/insurance_plan_list.dart';
 import 'package:upm_mii/constants/style.dart';
 
+class LoadHome extends StatefulWidget {
+  const LoadHome({Key? key}) : super(key: key);
+
+  @override
+  State<LoadHome> createState() => _LoadHomeState();
+}
+
+class _LoadHomeState extends State<LoadHome> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: NewsController.getNews(),
+      builder: (context, AsyncSnapshot<List<News>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.white,
+            child: const SpinKitDancingSquare(
+              color: Color(0xff243E82),
+            ),
+          );
+        } else {
+          return Home(news: snapshot.data!);
+        }
+      },
+    );
+  }
+}
+
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({this.news, Key? key}) : super(key: key);
+
+  final List<News>? news;
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  List<News> news = [
-    News(
-      image: "assets/life_insurance.jpg",
-      title: "Covid-19 coverage for takaful",
-      date: DateTime.parse('2019-02-24'),
-      url: '',
-    ),
-    News(
-      image: "assets/life_insurance.jpg",
-      title: "Covid-19 coverage for takaful",
-      date: DateTime.parse('2019-02-24'),
-      url: '',
-    ),
-    News(
-      image: "assets/life_insurance.jpg",
-      title: "Covid-19 coverage for takaful",
-      date: DateTime.parse('2019-02-24'),
-      url: '',
-    ),
-  ];
+  List<News> news = [];
 
   @override
   void initState() {
+    news = widget.news!;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
@@ -71,7 +85,11 @@ class _HomeState extends State<Home> {
               children: [
                 ...news.map((item) {
                   return NewsCard(
-                      image: item.image!, title: item.title!, date: item.date!);
+                    image: item.image!,
+                    title: item.title!,
+                    date: item.date!,
+                    url: item.url!,
+                  );
                 }),
               ],
             ),
@@ -127,12 +145,17 @@ class _HomeState extends State<Home> {
 
 class NewsCard extends StatelessWidget {
   const NewsCard(
-      {Key? key, required this.image, required this.title, required this.date})
+      {Key? key,
+      required this.image,
+      required this.title,
+      required this.date,
+      required this.url})
       : super(key: key);
 
   final String image;
   final String title;
   final DateTime date;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +163,16 @@ class NewsCard extends StatelessWidget {
       height: 200,
       width: 400,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Newspage(
+                        title: title,
+                        date: date,
+                        url: url,
+                      )));
+        },
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: Colors.blue[800],
@@ -157,8 +189,9 @@ class NewsCard extends StatelessWidget {
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Image.asset(
+                      child: Image.network(
                         image,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Flexible(
