@@ -36,14 +36,6 @@ class _InformationState extends State<Information> {
           children: [
             ElevatedButton(
               onPressed: () {},
-              child: Text('Cancel'),
-              style: Style.buttonStyle(),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            ElevatedButton(
-              onPressed: () {},
               child: Text('Save'),
               style: Style.buttonStyle(),
             ),

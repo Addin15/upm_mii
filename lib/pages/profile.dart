@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upm_mii/pages/profile/edit_profile.dart';
+import 'package:upm_mii/pages/profile/landing_page.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
