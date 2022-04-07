@@ -25,12 +25,12 @@ class UserInformation {
       UserInformation(
         id: json['user_id'],
         name: json['name'],
-        address: json['address'],
-        nric: json['nric'],
-        gender: json['gender'],
-        birth_date: json['birth_date'],
-        age: int.parse(json['age']),
-        phone: json['phone'],
-        state: json['state'],
+        address: json['address'].toString(),
+        nric: json['nric'].toString(),
+        gender: json['gender'].toString(),
+        birth_date: json['birth_date'].toString(),
+        age: int.parse(json['age'].toString()),
+        phone: json['phone'].toString(),
+        state: json['state'].toString(),
       );
 }

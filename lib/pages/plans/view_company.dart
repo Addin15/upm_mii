@@ -8,11 +8,13 @@ import 'package:upm_mii/controllers/company_controller.dart';
 import 'package:upm_mii/models/company.dart';
 import 'package:upm_mii/models/company_faq.dart';
 import 'package:upm_mii/models/insurance_plan.dart';
+import 'package:upm_mii/models/user.dart';
 import 'package:upm_mii/pages/plans/view_insurance_plan.dart';
 
 class LoadViewCompany extends StatefulWidget {
-  const LoadViewCompany({this.company, Key? key}) : super(key: key);
+  const LoadViewCompany({this.user, this.company, Key? key}) : super(key: key);
 
+  final User? user;
   final Company? company;
 
   @override
@@ -49,6 +51,7 @@ class _LoadViewCompanyState extends State<LoadViewCompany> {
           );
         } else {
           return ViewCompany(
+            user: widget.user,
             company: widget.company,
             insurances: snapshot.data!['insurances'] as List<InsurancePlan>,
             faqs: snapshot.data!['faqs'] as List<CompanyFAQ>,
@@ -60,9 +63,11 @@ class _LoadViewCompanyState extends State<LoadViewCompany> {
 }
 
 class ViewCompany extends StatefulWidget {
-  const ViewCompany({this.company, this.insurances, this.faqs, Key? key})
+  const ViewCompany(
+      {this.user, this.company, this.insurances, this.faqs, Key? key})
       : super(key: key);
 
+  final User? user;
   final Company? company;
   final List<InsurancePlan>? insurances;
   final List<CompanyFAQ>? faqs;
@@ -232,8 +237,8 @@ class _ViewCompanyState extends State<ViewCompany>
                   Navigator.push(
                       context,
                       CupertinoPageRoute(
-                          builder: (context) =>
-                              ViewInsurancePlan(insurances[index])));
+                          builder: (context) => ViewInsurancePlan(
+                              widget.user!, insurances[index])));
                 },
                 child: Card(
                   shape: RoundedRectangleBorder(

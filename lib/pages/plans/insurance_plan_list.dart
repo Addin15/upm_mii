@@ -5,10 +5,13 @@ import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/controllers/insurance_plan_controller.dart';
 import 'package:upm_mii/models/insurance_plan.dart';
+import 'package:upm_mii/models/user.dart';
 import 'package:upm_mii/pages/plans/view_insurance_plan.dart';
 
 class LoadInsurancePlanList extends StatefulWidget {
-  const LoadInsurancePlanList({Key? key}) : super(key: key);
+  const LoadInsurancePlanList({this.user, Key? key}) : super(key: key);
+
+  final User? user;
 
   @override
   State<LoadInsurancePlanList> createState() => _LoadInsurancePlanListState();
@@ -31,6 +34,7 @@ class _LoadInsurancePlanListState extends State<LoadInsurancePlanList> {
           );
         } else {
           return InsurancePlanList(
+            user: widget.user,
             insurances: snapshot.data,
             controller: insurancePlanController,
           );
@@ -41,9 +45,11 @@ class _LoadInsurancePlanListState extends State<LoadInsurancePlanList> {
 }
 
 class InsurancePlanList extends StatefulWidget {
-  const InsurancePlanList({this.insurances, this.controller, Key? key})
+  const InsurancePlanList(
+      {this.user, this.insurances, this.controller, Key? key})
       : super(key: key);
 
+  final User? user;
   final List<InsurancePlan>? insurances;
   final InsurancePlanController? controller;
 
@@ -130,8 +136,8 @@ class _InsurancePlanListState extends State<InsurancePlanList> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) =>
-                                      ViewInsurancePlan(insurances[index])));
+                                  builder: (context) => ViewInsurancePlan(
+                                      widget.user!, insurances[index])));
                         },
                         child: Card(
                           shape: RoundedRectangleBorder(

@@ -5,10 +5,13 @@ import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/controllers/company_controller.dart';
 import 'package:upm_mii/models/company.dart';
+import 'package:upm_mii/models/user.dart';
 import 'package:upm_mii/pages/plans/view_company.dart';
 
 class LoadCompanyList extends StatefulWidget {
-  const LoadCompanyList({Key? key}) : super(key: key);
+  const LoadCompanyList({this.user, Key? key}) : super(key: key);
+
+  final User? user;
 
   @override
   State<LoadCompanyList> createState() => _LoadCompanyListState();
@@ -31,6 +34,7 @@ class _LoadCompanyListState extends State<LoadCompanyList> {
           );
         } else {
           return CompanyList(
+            user: widget.user,
             companies: snapshot.data,
             controller: companyController,
           );
@@ -41,9 +45,10 @@ class _LoadCompanyListState extends State<LoadCompanyList> {
 }
 
 class CompanyList extends StatefulWidget {
-  const CompanyList({this.companies, this.controller, Key? key})
+  const CompanyList({this.user, this.companies, this.controller, Key? key})
       : super(key: key);
 
+  final User? user;
   final List<Company>? companies;
   final CompanyController? controller;
 
@@ -120,6 +125,7 @@ class _CompanyListState extends State<CompanyList> {
                               context,
                               CupertinoPageRoute(
                                   builder: (context) => LoadViewCompany(
+                                      user: widget.user,
                                       company: companies[index])));
                         },
                         child: Card(

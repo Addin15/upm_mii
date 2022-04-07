@@ -90,8 +90,10 @@ class _LandingPageState extends State<LandingPage> {
                       widget.user!.id!, userInfo);
 
                   if (res) {
-                    Navigator.pushReplacementNamed(context, 'home',
-                        arguments: widget.user);
+                    Navigator.pushReplacementNamed(context, 'home', arguments: {
+                      'user': widget.user,
+                      'info': res,
+                    });
                   }
                 },
                 child: Text('Save'),

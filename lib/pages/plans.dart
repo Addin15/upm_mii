@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:upm_mii/models/user.dart';
 import 'package:upm_mii/pages/plans/company_list.dart';
 import 'package:upm_mii/pages/plans/insurance_plan_list.dart';
 
 class Plans extends StatefulWidget {
-  const Plans({Key? key}) : super(key: key);
+  const Plans({this.user, Key? key}) : super(key: key);
+
+  final User? user;
 
   @override
   State<Plans> createState() => _PlansState();
@@ -138,9 +141,9 @@ class _PlansState extends State<Plans> with TickerProviderStateMixin {
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: const [
-              LoadInsurancePlanList(),
-              LoadCompanyList(),
+            children: [
+              LoadInsurancePlanList(user: widget.user),
+              LoadCompanyList(user: widget.user),
             ],
           ),
         ),

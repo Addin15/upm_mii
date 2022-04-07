@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/models/user.dart';
+import 'package:upm_mii/models/user_information.dart';
 import 'package:upm_mii/pages/profile.dart';
 import 'package:upm_mii/pages/plans.dart';
 import 'package:upm_mii/pages/home.dart';
@@ -13,21 +14,17 @@ class Nav extends StatefulWidget {
   State<Nav> createState() => _NavState();
 }
 
-const pages = [
-  LoadHome(),
-  FAQs(),
-  Plans(),
-  Profile(),
-];
-
 class _NavState extends State<Nav> {
   int _selectedPage = 0;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    User user = ModalRoute.of(context)!.settings.arguments as User;
+    var data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
+    User user = data['user'];
+    UserInformation info = data['info'];
     print(user.username);
 
     return Container(
@@ -44,7 +41,12 @@ class _NavState extends State<Nav> {
           // ),
           body: IndexedStack(
             index: _selectedPage,
-            children: pages,
+            children: [
+              LoadHome(),
+              FAQs(),
+              Plans(user: user),
+              Profile(),
+            ],
           ),
           endDrawer: const Profile(),
           bottomNavigationBar: BottomNavigationBar(

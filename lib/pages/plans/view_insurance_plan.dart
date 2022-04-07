@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/constants/style.dart';
+import 'package:upm_mii/controllers/user_plan_controller.dart';
 import 'package:upm_mii/models/insurance_plan.dart';
+import 'package:upm_mii/models/user.dart';
 
 class ViewInsurancePlan extends StatefulWidget {
-  const ViewInsurancePlan(this.insurancePlan, {Key? key}) : super(key: key);
+  const ViewInsurancePlan(this.user, this.insurancePlan, {Key? key})
+      : super(key: key);
 
+  final User user;
   final InsurancePlan insurancePlan;
 
   @override
@@ -171,7 +175,13 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
                       Container(
                         alignment: Alignment.centerRight,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            UserPlanController userPlanController =
+                                UserPlanController();
+
+                            await userPlanController.applyInsurancePlan(
+                                widget.user.id!, widget.insurancePlan.id!);
+                          },
                           style: Style.buttonStyle(
                             color: AppColor.primary,
                           ),

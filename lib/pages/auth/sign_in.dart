@@ -5,6 +5,7 @@ import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/controllers/auth_controller.dart';
 import 'package:upm_mii/controllers/user_controller.dart';
 import 'package:upm_mii/models/user.dart';
+import 'package:upm_mii/models/user_information.dart';
 import 'package:upm_mii/pages/profile/landing_page.dart';
 
 class SignIn extends StatefulWidget {
@@ -106,26 +107,31 @@ class _SignInState extends State<SignIn> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             AuthController auth = AuthController();
-                            dynamic res = await auth.login(
+                            dynamic user = await auth.login(
                                 _emailController.text,
                                 _passwordController.text);
 
-                            if (res == null) {
+                            if (user == null) {
                               print('error login');
                             } else {
                               UserController userController = UserController();
-                              dynamic user = await userController
-                                  .getUserInformation((res as User).id!);
+                              var info = await userController
+                                  .getUserInformation((user as User).id!);
 
-                              if (user == null) {
+                              print(info);
+
+                              if (info.name == null) {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            LandingPage(user: res)));
+                                            LandingPage(user: user)));
                               } else {
                                 Navigator.pushReplacementNamed(context, 'home',
-                                    arguments: res);
+                                    arguments: {
+                                      'user': user,
+                                      'info': info,
+                                    });
                               }
                             }
                           }

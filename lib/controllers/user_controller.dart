@@ -36,6 +36,7 @@ class UserController {
 
   Future<dynamic> getUserInformation(int userId) async {
     try {
+      print('User ID: $userId');
       //String token = await AuthenticateUser.getCachedToken();
       String urlbase =
           '${Config.baseUrl}${Config.apiUrl}/profile/$userId/profile';
@@ -49,10 +50,12 @@ class UserController {
         },
       );
 
+      print(response.body);
+
       if (response.statusCode == 200) {
+        print('success');
         List body = jsonDecode(response.body);
-        UserInformation userInfo =
-            body[0].map((item) => UserInformation.fromJson(item)).toList();
+        UserInformation userInfo = UserInformation.fromJson(body.first);
         return userInfo;
       }
 
