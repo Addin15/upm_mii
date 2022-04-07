@@ -37,8 +37,9 @@ class UserController {
   Future<dynamic> getUserInformation(int userId) async {
     try {
       //String token = await AuthenticateUser.getCachedToken();
-      String urlbase = '${Config.baseUrl}${Config.apiUrl}/$userId';
-      late UserInformation userInformation;
+      String urlbase =
+          '${Config.baseUrl}${Config.apiUrl}/profile/$userId/profile';
+
       var response = await get(
         Uri.parse(urlbase),
         headers: {
@@ -52,13 +53,44 @@ class UserController {
         List body = jsonDecode(response.body);
         UserInformation userInfo =
             body[0].map((item) => UserInformation.fromJson(item)).toList();
-        userInformation = userInfo;
+        return userInfo;
       }
 
-      return userInformation;
+      return null;
     } catch (e) {
       print(e.toString());
       return null;
+    }
+  }
+
+  Future<bool> createUserInformation(
+      int userId, Map<String, dynamic> data) async {
+    try {
+      //String token = await AuthenticateUser.getCachedToken();
+      String urlbase =
+          '${Config.baseUrl}${Config.apiUrl}/profile/$userId/create';
+
+      var response = await post(
+        Uri.parse(urlbase),
+        body: jsonEncode(data),
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+          //'Authorization': "Bearer " + token,
+        },
+      );
+      print(response.body);
+
+      if (response.statusCode == 201) {
+        print('true');
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      print('error');
+      print(e.toString());
+      return false;
     }
   }
 }

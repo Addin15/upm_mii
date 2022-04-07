@@ -4,6 +4,8 @@ import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/controllers/auth_controller.dart';
 import 'package:upm_mii/controllers/user_controller.dart';
+import 'package:upm_mii/models/user.dart';
+import 'package:upm_mii/pages/profile/landing_page.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -111,8 +113,20 @@ class _SignInState extends State<SignIn> {
                             if (res == null) {
                               print('error login');
                             } else {
-                              Navigator.pushReplacementNamed(context, 'home',
-                                  arguments: res);
+                              UserController userController = UserController();
+                              dynamic user = await userController
+                                  .getUserInformation((res as User).id!);
+
+                              if (user == null) {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            LandingPage(user: res)));
+                              } else {
+                                Navigator.pushReplacementNamed(context, 'home',
+                                    arguments: res);
+                              }
                             }
                           }
                         },

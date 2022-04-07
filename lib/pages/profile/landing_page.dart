@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/constants/style.dart';
+import 'package:upm_mii/controllers/user_controller.dart';
+import 'package:upm_mii/models/user.dart';
 
 class LandingPage extends StatefulWidget {
+  const LandingPage({this.user});
+
+  final User? user;
+
   @override
   _LandingPageState createState() => _LandingPageState();
 }
 
 class _LandingPageState extends State<LandingPage> {
+  TextEditingController name = TextEditingController();
+  TextEditingController nric = TextEditingController();
+  TextEditingController gender = TextEditingController();
+  TextEditingController birthdate = TextEditingController();
+  TextEditingController age = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController state = TextEditingController();
+  TextEditingController address = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,21 +43,21 @@ class _LandingPageState extends State<LandingPage> {
           SizedBox(
             height: 10,
           ),
-          buildTextField("Full Name", " "),
+          buildTextField("Full Name", name),
           const SizedBox(height: 10),
-          buildTextField("MyKad Number", " "),
+          buildTextField("MyKad Number", nric),
           const SizedBox(height: 10),
-          buildTextField("Gender", " "),
+          buildTextField("Gender", gender),
           const SizedBox(height: 10),
-          buildTextField("Date of Birth", " "),
+          buildTextField("Date of Birth", birthdate),
           const SizedBox(height: 10),
-          buildTextField("Age", " "),
+          buildTextField("Age", age),
           const SizedBox(height: 10),
-          buildTextField("Phone", " "),
+          buildTextField("Phone", phone),
           const SizedBox(height: 10),
-          buildTextField("State", " "),
+          buildTextField("State", state),
           const SizedBox(height: 10),
-          buildTextField("Address", " "),
+          buildTextField("Address", address),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +72,28 @@ class _LandingPageState extends State<LandingPage> {
                 width: 10,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  Map<String, dynamic> userInfo = {
+                    'user_id': widget.user!.id,
+                    'name': name.text,
+                    'nric': nric.text,
+                    'gender': gender.text,
+                    'birth_date': birthdate.text,
+                    'age': int.parse(age.text),
+                    'phone': phone.text,
+                    'state': state.text,
+                    'address': address.text,
+                  };
+
+                  UserController userController = UserController();
+                  bool res = await userController.createUserInformation(
+                      widget.user!.id!, userInfo);
+
+                  if (res) {
+                    Navigator.pushReplacementNamed(context, 'home',
+                        arguments: widget.user);
+                  }
+                },
                 child: Text('Save'),
                 style: Style.buttonStyle(),
               ),
@@ -68,8 +104,7 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 
-  buildTextField(String labelText, String input) {
-    TextEditingController text = TextEditingController(text: input);
+  buildTextField(String labelText, TextEditingController controller) {
     return Column(
       children: [
         Text(labelText),
@@ -77,7 +112,7 @@ class _LandingPageState extends State<LandingPage> {
           height: 10,
         ),
         TextField(
-          controller: text,
+          controller: controller,
           decoration: Style.formStyle(),
         ),
       ],
