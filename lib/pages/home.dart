@@ -382,7 +382,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                   ],
                 ),
                 const Text(
-                  'Welcome Back! Amirah',
+                  'Welcome Back!',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,

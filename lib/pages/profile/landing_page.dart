@@ -86,10 +86,10 @@ class _LandingPageState extends State<LandingPage> {
                   };
 
                   UserController userController = UserController();
-                  bool res = await userController.createUserInformation(
+                  var res = await userController.createUserInformation(
                       widget.user!.id!, userInfo);
 
-                  if (res) {
+                  if (res != null) {
                     Navigator.pushReplacementNamed(context, 'home', arguments: {
                       'user': widget.user,
                       'info': res,

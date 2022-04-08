@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:upm_mii/constants/app_color.dart';
 import 'package:upm_mii/constants/style.dart';
+import 'package:upm_mii/models/user.dart';
+import 'package:upm_mii/models/user_information.dart';
 import 'package:upm_mii/pages/profile/informartion.dart';
-
 import 'account.dart';
 
 class EditProfile extends StatefulWidget {
+  const EditProfile({Key? key, this.user, this.info}) : super(key: key);
+  final User? user;
+  final UserInformation? info;
+
   @override
   _EditProfileState createState() => _EditProfileState();
 }
@@ -107,8 +112,8 @@ class _EditProfileState extends State<EditProfile>
               key: pageKey,
               controller: _tabController2,
               children: [
-                Account(),
-                Information(),
+                Account(user: widget.user, info: widget.info),
+                Information(user: widget.user, info: widget.info),
               ],
             ),
           ),

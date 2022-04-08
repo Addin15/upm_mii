@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:upm_mii/constants/style.dart';
 import 'package:upm_mii/constants/style.dart';
+import 'package:upm_mii/models/user.dart';
+import 'package:upm_mii/models/user_information.dart';
 
 class Information extends StatefulWidget {
+  const Information({this.user, this.info, Key? key}) : super(key: key);
+  final User? user;
+  final UserInformation? info;
+
   @override
   _InformationState createState() => _InformationState();
 }
@@ -13,22 +19,21 @@ class _InformationState extends State<Information> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: ListView(children: [
-        buildTextField("Full Name", "Siti Nur Amirah Binti Ahmad"),
+        buildTextField("Full Name", widget.info!.name!),
         const SizedBox(height: 10),
-        buildTextField("MyKad Number", "000902040116"),
+        buildTextField("MyKad Number", widget.info!.nric!),
         const SizedBox(height: 10),
-        buildTextField("Gender", "Female"),
+        buildTextField("Gender", widget.info!.gender!),
         const SizedBox(height: 10),
-        buildTextField("Date of Birth", "09-02-2000"),
+        buildTextField("Date of Birth", widget.info!.birth_date!),
         const SizedBox(height: 10),
-        buildTextField("Age", "22"),
+        buildTextField("Age", widget.info!.age!.toString()),
         const SizedBox(height: 10),
-        buildTextField("Phone", "017-6544375"),
+        buildTextField("Phone", widget.info!.phone!),
         const SizedBox(height: 10),
-        buildTextField("State", "Melaka"),
+        buildTextField("State", widget.info!.state!),
         const SizedBox(height: 10),
-        buildTextField(
-            "Address", "425-1 KM10, Jalan Melati, Umbai, 75460 Melaka"),
+        buildTextField("Address", widget.info!.address!),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

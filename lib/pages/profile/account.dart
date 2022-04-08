@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:upm_mii/constants/style.dart';
+import 'package:upm_mii/models/user.dart';
+import 'package:upm_mii/models/user_information.dart';
 
 class Account extends StatefulWidget {
+  const Account({this.user, this.info, Key? key}) : super(key: key);
+  final User? user;
+  final UserInformation? info;
+
   @override
   _AccountState createState() => _AccountState();
 }
@@ -39,7 +45,7 @@ class _AccountState extends State<Account> {
                       ),
                     ),
                     Text(
-                      'Siti Nur Amirah Binti Ahmad',
+                      widget.info!.name!,
                       style: TextStyle(
                           color: Color.fromRGBO(39, 105, 171, 1),
                           fontSize: 18,
@@ -81,14 +87,6 @@ class _AccountState extends State<Account> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text('Cancel'),
-                              style: Style.buttonStyle(),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
                             ElevatedButton(
                               onPressed: () {},
                               child: Text('Save'),

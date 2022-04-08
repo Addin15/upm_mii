@@ -66,7 +66,7 @@ class UserController {
     }
   }
 
-  Future<bool> createUserInformation(
+  Future<dynamic> createUserInformation(
       int userId, Map<String, dynamic> data) async {
     try {
       //String token = await AuthenticateUser.getCachedToken();
@@ -85,15 +85,17 @@ class UserController {
       print(response.body);
 
       if (response.statusCode == 201) {
-        print('true');
-        return true;
+        List body = jsonDecode(response.body);
+        UserInformation userInfo = UserInformation.fromJson(body.first);
+
+        return userInfo;
       }
 
-      return false;
+      return null;
     } catch (e) {
       print('error');
       print(e.toString());
-      return false;
+      return null;
     }
   }
 }

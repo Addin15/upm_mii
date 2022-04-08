@@ -45,7 +45,7 @@ class _NavState extends State<Nav> {
               LoadHome(),
               FAQs(),
               Plans(user: user),
-              Profile(),
+              Profile(user: user, info: info),
             ],
           ),
           endDrawer: const Profile(),

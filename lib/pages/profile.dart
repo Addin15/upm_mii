@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:upm_mii/controllers/user_controller.dart';
+import 'package:upm_mii/models/user.dart';
+import 'package:upm_mii/models/user_information.dart';
 import 'package:upm_mii/pages/profile/edit_profile.dart';
 import 'package:upm_mii/pages/profile/landing_page.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({this.user, this.info, Key? key}) : super(key: key);
+
+  final User? user;
+  final UserInformation? info;
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -14,9 +19,6 @@ class _ProfileState extends State<Profile> {
   final padding = EdgeInsets.symmetric(horizontal: 20);
   @override
   Widget build(BuildContext context) {
-    UserController controller = UserController();
-    final name = 'Amirah';
-    final email = 'Amirah00@gmail.com';
     return Drawer(
       child: Material(
         color: Colors.white,
@@ -24,8 +26,8 @@ class _ProfileState extends State<Profile> {
           padding: padding,
           children: [
             buildHeader(
-              name: name,
-              email: email,
+              name: widget.info!.name!,
+              email: widget.user!.username!,
             ),
             buildMenuItem(
                 text: 'Profile',
@@ -122,7 +124,8 @@ class _ProfileState extends State<Profile> {
     switch (index) {
       case 0:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => EditProfile(),
+          builder: (context) =>
+              EditProfile(user: widget.user, info: widget.info),
         ));
     }
   }
