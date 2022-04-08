@@ -331,48 +331,49 @@ class NewsCard extends StatelessWidget {
           ),
           child: Container(
             height: 300,
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Image.network(
-                      image,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Column(
+                Row(
                   children: [
                     Expanded(
+                      flex: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Image.network(
+                          image,
+                          height: 170,
+                          width: 100,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    Flexible(
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
+                            horizontal: 10, vertical: 10),
                         child: Text(
                           title,
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
-                            fontSize: 24,
+                            fontSize: 20,
                           ),
                         ),
                       ),
                     ),
-                    Text(
-                      DateFormat.yMMMd().format(date),
-                      style: const TextStyle(
-                          color: Colors.yellow,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
                   ],
+                ),
+                Text(
+                  DateFormat.yMMMd().format(date),
+                  style: const TextStyle(
+                      color: Colors.yellow,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 11),
                 ),
               ],
             ),
