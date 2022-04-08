@@ -17,8 +17,11 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final padding = EdgeInsets.symmetric(horizontal: 20);
+
   @override
   Widget build(BuildContext context) {
+    print('Name' + widget.info!.name!);
+
     return Drawer(
       child: Material(
         color: Colors.white,
@@ -26,8 +29,8 @@ class _ProfileState extends State<Profile> {
           padding: padding,
           children: [
             buildHeader(
-              name: widget.info!.name!,
-              email: widget.user!.username!,
+              name: widget.user!.username!,
+              email: widget.user!.email!,
             ),
             buildMenuItem(
                 text: 'Profile',

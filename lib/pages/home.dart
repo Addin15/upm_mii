@@ -182,19 +182,26 @@ class NewsCard extends StatelessWidget {
           child: Container(
             height: 300,
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Image.network(
+                      image,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Column(
                   children: [
                     Expanded(
-                      flex: 1,
-                      child: Image.network(
-                        image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Flexible(
                       child: Container(
                         padding:
                             EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -203,19 +210,19 @@ class NewsCard extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
-                            fontSize: 16,
+                            fontSize: 24,
                           ),
                         ),
                       ),
                     ),
+                    Text(
+                      DateFormat.yMMMd().format(date),
+                      style: TextStyle(
+                          color: Colors.yellow,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
                   ],
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  DateFormat.yMMMd().format(date),
-                  style: TextStyle(
-                    color: Colors.yellow,
-                  ),
                 ),
               ],
             ),
