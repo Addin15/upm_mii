@@ -118,9 +118,7 @@ class _SignInState extends State<SignIn> {
                               var info = await userController
                                   .getUserInformation((user as User).id!);
 
-                              print(info);
-
-                              if (info.name == null) {
+                              if (info == null) {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(

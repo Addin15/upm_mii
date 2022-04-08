@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upm_mii/controllers/user_controller.dart';
 import 'package:upm_mii/pages/profile/edit_profile.dart';
 import 'package:upm_mii/pages/profile/landing_page.dart';
 
@@ -13,6 +14,7 @@ class _ProfileState extends State<Profile> {
   final padding = EdgeInsets.symmetric(horizontal: 20);
   @override
   Widget build(BuildContext context) {
+    UserController controller = UserController();
     final name = 'Amirah';
     final email = 'Amirah00@gmail.com';
     return Drawer(
