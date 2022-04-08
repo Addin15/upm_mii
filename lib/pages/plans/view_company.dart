@@ -154,10 +154,10 @@ class _ViewCompanyState extends State<ViewCompany>
                           ),
                           const SizedBox(height: 60),
                           Padding(
-                            padding: EdgeInsets.only(left: 8.0),
+                            padding: const EdgeInsets.only(left: 8.0),
                             child: Text(
                               widget.company!.name!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
@@ -209,7 +209,12 @@ class _ViewCompanyState extends State<ViewCompany>
                         child: CircleAvatar(
                           radius: 50,
                           backgroundColor: Colors.white,
-                          backgroundImage: getImg(widget.company!.imgUrl),
+                          child: Padding(
+                            padding: const EdgeInsets.all(3), // Border radius
+                            child:
+                                ClipOval(child: getImg(widget.company!.imgUrl)),
+                          ),
+                          //backgroundImage: getImg(widget.company!.imgUrl),
                         ),
                       ),
                     ],
@@ -453,9 +458,9 @@ class _ViewCompanyState extends State<ViewCompany>
 
   getImg(String? imgUrl) {
     if (imgUrl!.isEmpty) {
-      return const AssetImage('assets/company_default_logo.jpg');
+      return Image.asset('assets/company_default_logo.jpg');
     } else {
-      return NetworkImage(imgUrl);
+      return Image.network(imgUrl);
     }
   }
 }

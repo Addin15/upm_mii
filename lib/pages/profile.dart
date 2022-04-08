@@ -20,8 +20,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    print('Name' + widget.info!.name!);
-
     return Drawer(
       child: Material(
         color: Colors.white,

@@ -4,7 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:upm_mii/controllers/home_controller.dart';
+import 'package:upm_mii/controllers/user_plan_controller.dart';
 import 'package:upm_mii/models/news.dart';
+import 'package:upm_mii/models/subscribed_plan.dart';
+import 'package:upm_mii/models/user.dart';
 import 'package:upm_mii/pages/home/billing.dart';
 import 'package:upm_mii/pages/home/news.dart';
 import 'package:upm_mii/pages/plans/company_list.dart';
@@ -12,18 +15,31 @@ import 'package:upm_mii/pages/plans/insurance_plan_list.dart';
 import 'package:upm_mii/constants/style.dart';
 
 class LoadHome extends StatefulWidget {
-  const LoadHome({Key? key}) : super(key: key);
+  const LoadHome({this.user, Key? key}) : super(key: key);
+
+  final User? user;
 
   @override
   State<LoadHome> createState() => _LoadHomeState();
 }
 
 class _LoadHomeState extends State<LoadHome> {
+  Future<Map<String, dynamic>> getData() async {
+    List<News> news = await NewsController.getNews();
+    List<SubscribedPlan> userPlans =
+        await UserPlanController.getUserPlan(widget.user!.id!);
+
+    return {
+      'news': news,
+      'user_plan': userPlans,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: NewsController.getNews(),
-      builder: (context, AsyncSnapshot<List<News>> snapshot) {
+      future: getData(),
+      builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
             alignment: Alignment.center,
@@ -33,7 +49,10 @@ class _LoadHomeState extends State<LoadHome> {
             ),
           );
         } else {
-          return Home(news: snapshot.data!);
+          return Home(
+            news: snapshot.data!['news'] as List<News>,
+            subscribedPlan: snapshot.data!['user_plan'] as List<SubscribedPlan>,
+          );
         }
       },
     );
@@ -41,9 +60,10 @@ class _LoadHomeState extends State<LoadHome> {
 }
 
 class Home extends StatefulWidget {
-  const Home({this.news, Key? key}) : super(key: key);
+  const Home({this.news, this.subscribedPlan, Key? key}) : super(key: key);
 
   final List<News>? news;
+  final List<SubscribedPlan>? subscribedPlan;
 
   @override
   State<Home> createState() => _HomeState();
@@ -63,6 +83,7 @@ class _HomeState extends State<Home> {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           HeaderWithSearchBox(size: size),
           const SizedBox(
@@ -98,52 +119,90 @@ class _HomeState extends State<Home> {
             height: 15,
           ),
           const TitleWithbutton(text: "Your Plans"),
-          Container(
-            height: 75,
-            child: Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              color: Colors.blue[800],
-              shape: RoundedRectangleBorder(
+          Card(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            color: Colors.blue[800],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Image.asset(
-                            'assets/pill.jpg',
-                            height: 50,
-                            width: 100,
-                          ),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Image.asset(
-                            'assets/pill.jpg',
-                            height: 50,
-                            width: 100,
-                          ),
-                        ),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Image.asset(
-                            'assets/pill.jpg',
-                            height: 50,
-                            width: 100,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                  ],
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PlanCard(
+                    img: 'assets/pill.jpg',
+                    label: 'All',
+                    onTap: () {},
+                  ),
+                  PlanCard(
+                    img: 'assets/pill.jpg',
+                    label: 'Medical',
+                    onTap: () {},
+                  ),
+                  PlanCard(
+                    img: 'assets/pill.jpg',
+                    label: 'Property',
+                    onTap: () {},
+                  ),
+                  PlanCard(
+                    img: 'assets/pill.jpg',
+                    label: 'Automobile',
+                    onTap: () {},
+                  ),
+                  PlanCard(
+                    img: 'assets/pill.jpg',
+                    label: 'Education',
+                    onTap: () {},
+                  ),
+                ],
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PlanCard extends StatelessWidget {
+  const PlanCard({this.img, this.label, this.onTap, Key? key})
+      : super(key: key);
+
+  final String? img;
+  final String? label;
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Image.asset(
+                img!,
+                fit: BoxFit.fill,
+                height: 40,
+                width: 50,
+              ),
+            ),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label!,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 12,
             ),
           ),
         ],
@@ -168,7 +227,7 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       width: 400,
       child: GestureDetector(
@@ -215,7 +274,7 @@ class NewsCard extends StatelessWidget {
                         padding:
                             EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                         child: Text(
-                          "$title",
+                          title,
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
@@ -226,7 +285,7 @@ class NewsCard extends StatelessWidget {
                     ),
                     Text(
                       DateFormat.yMMMd().format(date),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.yellow,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),

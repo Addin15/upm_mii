@@ -43,8 +43,8 @@ class _NavState extends State<Nav> {
           body: IndexedStack(
             index: _selectedPage,
             children: [
-              LoadHome(),
-              GetFAQ(),
+              LoadHome(user: user),
+              FAQs(),
               Plans(user: user),
               Profile(user: user, info: info),
             ],

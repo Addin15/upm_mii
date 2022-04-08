@@ -85,8 +85,8 @@ class UserController {
       print(response.body);
 
       if (response.statusCode == 201) {
-        List body = jsonDecode(response.body);
-        UserInformation userInfo = UserInformation.fromJson(body.first);
+        Map<String, dynamic> body = jsonDecode(response.body);
+        UserInformation userInfo = UserInformation.fromJson(body);
 
         return userInfo;
       }
