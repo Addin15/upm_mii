@@ -26,8 +26,8 @@ class _ProfileState extends State<Profile> {
           padding: padding,
           children: [
             buildHeader(
-              name: widget.info!.name!,
-              email: widget.user!.username!,
+              name: widget.user!.username!,
+              email: widget.user!.email!,
             ),
             buildMenuItem(
                 text: 'Profile',

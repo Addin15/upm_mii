@@ -48,7 +48,7 @@ class _NavState extends State<Nav> {
               Profile(user: user, info: info),
             ],
           ),
-          endDrawer: const Profile(),
+          endDrawer: Profile(user: user, info: info),
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: const Color(0xff243E82),
             currentIndex: _selectedPage,
