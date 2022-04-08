@@ -6,6 +6,7 @@ import 'package:upm_mii/pages/profile.dart';
 import 'package:upm_mii/pages/plans.dart';
 import 'package:upm_mii/pages/home.dart';
 import 'package:upm_mii/pages/faqs.dart';
+import 'getfaqs.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _NavState extends State<Nav> {
             index: _selectedPage,
             children: [
               LoadHome(),
-              FAQs(),
+              GetFAQ(),
               Plans(user: user),
               Profile(user: user, info: info),
             ],
