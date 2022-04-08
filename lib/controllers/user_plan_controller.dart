@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart';
 import 'package:upm_mii/models/subscribed_plan.dart';
 import 'package:upm_mii/utils/config.dart';
@@ -47,9 +49,12 @@ class UserPlanController {
         },
       );
 
-      if (response.statusCode == 201) {
-        print('success');
-        return [];
+      if (response.statusCode == 200) {
+        print('success subscribed');
+        List body = jsonDecode(response.body);
+        List<SubscribedPlan> subscribedPlans =
+            body.map((item) => SubscribedPlan.fromJson(item)).toList();
+        return subscribedPlans;
       }
 
       return [];

@@ -10,6 +10,7 @@ import 'package:upm_mii/models/subscribed_plan.dart';
 import 'package:upm_mii/models/user.dart';
 import 'package:upm_mii/pages/home/billing.dart';
 import 'package:upm_mii/pages/home/news.dart';
+import 'package:upm_mii/pages/home/view_subscribed_plan.dart';
 import 'package:upm_mii/pages/plans/company_list.dart';
 import 'package:upm_mii/pages/plans/insurance_plan_list.dart';
 import 'package:upm_mii/constants/style.dart';
@@ -50,6 +51,7 @@ class _LoadHomeState extends State<LoadHome> {
           );
         } else {
           return Home(
+            user: widget.user,
             news: snapshot.data!['news'] as List<News>,
             subscribedPlan: snapshot.data!['user_plan'] as List<SubscribedPlan>,
           );
@@ -60,8 +62,10 @@ class _LoadHomeState extends State<LoadHome> {
 }
 
 class Home extends StatefulWidget {
-  const Home({this.news, this.subscribedPlan, Key? key}) : super(key: key);
+  const Home({this.user, this.news, this.subscribedPlan, Key? key})
+      : super(key: key);
 
+  final User? user;
   final List<News>? news;
   final List<SubscribedPlan>? subscribedPlan;
 
@@ -81,11 +85,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    print(widget.subscribedPlan!.length);
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          HeaderWithSearchBox(size: size),
+          HeaderWithSearchBox(username: widget.user!.username, size: size),
           const SizedBox(
             height: 15,
           ),
@@ -135,29 +141,105 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   PlanCard(
-                    img: 'assets/pill.jpg',
+                    img: 'assets/plan.png',
                     label: 'All',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => ViewSubscribedPlan(
+                                    type: 'All',
+                                    plans: widget.subscribedPlan,
+                                  )));
+                    },
+                  ),
+                  PlanCard(
+                    img: 'assets/life.jpeg',
+                    label: 'Life',
+                    onTap: () {
+                      List<SubscribedPlan> passedPlans = [];
+                      for (SubscribedPlan plan in widget.subscribedPlan!) {
+                        if (plan.insurancePlan!.type!
+                            .toLowerCase()
+                            .contains('life')) {
+                          passedPlans.add(plan);
+                        }
+                      }
+
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => ViewSubscribedPlan(
+                                    type: 'Life',
+                                    plans: passedPlans,
+                                  )));
+                    },
                   ),
                   PlanCard(
                     img: 'assets/pill.jpg',
                     label: 'Medical',
-                    onTap: () {},
+                    onTap: () {
+                      List<SubscribedPlan> passedPlans = [];
+                      for (SubscribedPlan plan in widget.subscribedPlan!) {
+                        if (plan.insurancePlan!.type!
+                            .toLowerCase()
+                            .contains('medical')) {
+                          passedPlans.add(plan);
+                        }
+                      }
+
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => ViewSubscribedPlan(
+                                    type: 'Medical',
+                                    plans: passedPlans,
+                                  )));
+                    },
                   ),
                   PlanCard(
-                    img: 'assets/pill.jpg',
+                    img: 'assets/property.jpeg',
                     label: 'Property',
-                    onTap: () {},
+                    onTap: () {
+                      List<SubscribedPlan> passedPlans = [];
+                      for (SubscribedPlan plan in widget.subscribedPlan!) {
+                        if (plan.insurancePlan!.type!
+                            .toLowerCase()
+                            .contains('property')) {
+                          passedPlans.add(plan);
+                        }
+                      }
+
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => ViewSubscribedPlan(
+                                    type: 'Property',
+                                    plans: passedPlans,
+                                  )));
+                    },
                   ),
                   PlanCard(
-                    img: 'assets/pill.jpg',
+                    img: 'assets/car.jpg',
                     label: 'Automobile',
-                    onTap: () {},
-                  ),
-                  PlanCard(
-                    img: 'assets/pill.jpg',
-                    label: 'Education',
-                    onTap: () {},
+                    onTap: () {
+                      List<SubscribedPlan> passedPlans = [];
+                      for (SubscribedPlan plan in widget.subscribedPlan!) {
+                        if (plan.insurancePlan!.type!
+                            .toLowerCase()
+                            .contains('automobile')) {
+                          passedPlans.add(plan);
+                        }
+                      }
+
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                              builder: (context) => ViewSubscribedPlan(
+                                    type: 'Automobile',
+                                    plans: passedPlans,
+                                  )));
+                    },
                   ),
                 ],
               ),
@@ -180,7 +262,7 @@ class PlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Column(
         children: [
           ClipRRect(
@@ -271,8 +353,8 @@ class NewsCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
                         child: Text(
                           title,
                           style: TextStyle(
@@ -391,9 +473,12 @@ class BillSubcription extends StatelessWidget {
 
 class HeaderWithSearchBox extends StatelessWidget {
   const HeaderWithSearchBox({
+    this.username,
     Key? key,
     required this.size,
   }) : super(key: key);
+
+  final String? username;
 
   final Size size;
 
@@ -456,8 +541,8 @@ class HeaderWithSearchBox extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  'Welcome Back!',
+                Text(
+                  'Welcome Back! ${username}',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,

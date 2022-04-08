@@ -33,8 +33,7 @@ class InsurancePlan {
     this.premiumType,
   });
 
-  factory InsurancePlan.fromJsonWithCompany(Map<String, dynamic> json) =>
-      InsurancePlan(
+  factory InsurancePlan.fromJson(Map<String, dynamic> json) => InsurancePlan(
         id: json['i_id'],
         name: json['i_name'].toString(),
         type: json['i_type'].toString(),

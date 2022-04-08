@@ -24,7 +24,7 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
       color: AppColor.primary,
       child: SafeArea(
         child: Scaffold(
-          body: Column(
+          body: ListView(
             children: [
               Container(
                 decoration: const BoxDecoration(
@@ -165,6 +165,86 @@ class _ViewInsurancePlanState extends State<ViewInsurancePlan> {
                                   ),
                                   const SizedBox(height: 5),
                                   Text(widget.insurancePlan.description!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Increasing Sum Assured',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.incresingSum!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Min Sum Assured',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.minSum!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Entry Age',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.entryAge!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Max Coverage',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.maxCoverage!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'No Lapse Benefit',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.noLapseBenefit!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Cover Term',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.coverTerm!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Premium Type',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.premiumType!),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'Income Tax Relief',
+                                    style: TextStyle(
+                                        color: AppColor.primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(widget.insurancePlan.incomeTaxRelief!),
                                 ],
                               ),
                             ),

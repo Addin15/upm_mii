@@ -21,9 +21,8 @@ class InsurancePlanController {
 
       if (response.statusCode == 200) {
         List body = jsonDecode(response.body);
-        List<InsurancePlan> insurancePlan = body
-            .map((item) => InsurancePlan.fromJsonWithCompany(item))
-            .toList();
+        List<InsurancePlan> insurancePlan =
+            body.map((item) => InsurancePlan.fromJson(item)).toList();
         insurancePlanList = insurancePlan;
       }
 
