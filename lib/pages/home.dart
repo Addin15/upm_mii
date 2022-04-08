@@ -114,20 +114,29 @@ class _HomeState extends State<Home> {
                   children: [
                     Row(
                       children: [
-                        Image.asset(
-                          'assets/pill.jpg',
-                          height: 50,
-                          width: 100,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'assets/pill.jpg',
+                            height: 50,
+                            width: 100,
+                          ),
                         ),
-                        Image.asset(
-                          'assets/pill.jpg',
-                          height: 50,
-                          width: 100,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'assets/pill.jpg',
+                            height: 50,
+                            width: 100,
+                          ),
                         ),
-                        Image.asset(
-                          'assets/pill.jpg',
-                          height: 50,
-                          width: 100,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.asset(
+                            'assets/pill.jpg',
+                            height: 50,
+                            width: 100,
+                          ),
                         ),
                       ],
                     ),
