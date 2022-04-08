@@ -44,7 +44,7 @@ class _NavState extends State<Nav> {
             index: _selectedPage,
             children: [
               LoadHome(user: user),
-              FAQs(),
+              GetFAQ(),
               Plans(user: user),
               Profile(user: user, info: info),
             ],
