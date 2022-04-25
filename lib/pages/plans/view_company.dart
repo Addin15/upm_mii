@@ -92,6 +92,7 @@ class _ViewCompanyState extends State<ViewCompany>
 
   @override
   Widget build(BuildContext context) {
+    double maxWidth = MediaQuery.of(context).size.width;
     return Container(
       color: AppColor.primary,
       child: SafeArea(
@@ -135,7 +136,7 @@ class _ViewCompanyState extends State<ViewCompany>
               ),
               Expanded(
                 child: SizedBox(
-                  width: double.infinity,
+                  width: maxWidth,
                   // margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Stack(
                     children: [
@@ -144,7 +145,7 @@ class _ViewCompanyState extends State<ViewCompany>
                         children: [
                           Container(
                             height: 100,
-                            width: double.infinity,
+                            width: maxWidth,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: getBgImg(widget.company!.bgImgUrl),
@@ -365,7 +366,7 @@ class _ViewCompanyState extends State<ViewCompany>
                   color: AppColor.primary,
                 ),
                 const SizedBox(width: 15),
-                Text(widget.company!.website!),
+                Text(widget.company!.website!, maxLines: 10),
               ],
             ),
           ),
@@ -384,7 +385,7 @@ class _ViewCompanyState extends State<ViewCompany>
                   color: AppColor.primary,
                 ),
                 const SizedBox(width: 15),
-                Text(widget.company!.address!),
+                Text(widget.company!.address!, maxLines: 10),
               ],
             ),
           ),
@@ -403,7 +404,7 @@ class _ViewCompanyState extends State<ViewCompany>
                   color: AppColor.primary,
                 ),
                 const SizedBox(width: 15),
-                Text(widget.company!.about!),
+                Text(widget.company!.about!, maxLines: 10),
               ],
             ),
           ),

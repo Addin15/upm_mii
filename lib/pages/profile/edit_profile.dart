@@ -33,6 +33,7 @@ class _EditProfileState extends State<EditProfile>
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        elevation: 0,
         backgroundColor: AppColor.primary,
         title: Text(
           'Profile',

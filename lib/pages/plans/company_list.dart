@@ -188,9 +188,15 @@ class _CompanyListState extends State<CompanyList> {
 
   getImg(String? imgUrl) {
     if (imgUrl!.isEmpty) {
-      return Image.asset('assets/company_default_logo.jpg');
+      return Image.asset(
+        'assets/company_default_logo.jpg',
+        fit: BoxFit.fill,
+      );
     } else {
-      return Image.network(imgUrl);
+      return Image.network(
+        imgUrl,
+        fit: BoxFit.fill,
+      );
     }
   }
 }

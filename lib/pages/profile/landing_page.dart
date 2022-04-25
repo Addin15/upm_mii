@@ -64,14 +64,6 @@ class _LandingPageState extends State<LandingPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () {},
-                child: Text('Cancel'),
-                style: Style.buttonStyle(),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              ElevatedButton(
                 onPressed: () async {
                   Map<String, dynamic> userInfo = {
                     'user_id': widget.user!.id,

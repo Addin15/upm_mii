@@ -35,7 +35,7 @@ class _SignUpState extends State<SignUp> {
         padding: const EdgeInsets.symmetric(horizontal: 40),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: ListView(
             children: [
               Expanded(
                 child: Column(
